@@ -1,21 +1,51 @@
 {
-  "name": "api",
+  "name": "xposeAPI",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "author": "KrisRZ",
+  "license": "MIT",
   "scripts": {
-  "start:dev": "nodemon ./bin/www",
-  "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run nodemon",
+    "dev": "cross-env NODE_ENV=development node ./server/api.js",
+    "nodemon": "nodemon --exec npm run dev",
+    "lint": "eslint ./server/. ./config/. ./test/.",
+    "prepush": "npm test",
+    "pretest": "npm run lint",
+    "production": "cross-env NODE_ENV=production node ./server/api.js",
+    "test-ci": "jest --coverage --forceExit"
+  },
+  "jest": {
+    "globals": {
+      "__DEV__": true
     },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
-    "morgan": "^1.9.0"
+    "express-routes-mapper": "^1.0.2",
+    "helmet": "^3.12.0",
+    "jsonwebtoken": "^8.2.1",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.6",
+    "sqlite3": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.17.4"
+    "cross-env": "^5.1.4",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "fs-extra": "^6.0.1",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "nodemon": "^1.17.3",
+    "sanitize-filename": "^1.6.1",
+    "shx": "^0.2.2",
+    "supertest": "^3.0.0"
   }
 }
