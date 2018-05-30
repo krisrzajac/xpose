@@ -3,7 +3,7 @@ const best = require('./bestiary_data.json');
 
 const DataLoader = {
 
-  testFirstMonsterColumn(DataBase) {
+  loadBestiaryData(DataBase) {
 
     for (let besticle of best) {
 

@@ -4,7 +4,6 @@ const {
 } = require('../setup/_setup');
 const User = require('../../server/models/User');
 
-const temp = require('../../server/models/Homunculusskill.js')
 let user;
 
 beforeAll(async () => {

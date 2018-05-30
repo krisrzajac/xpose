@@ -1,52 +1,68 @@
 const privateRoutes = require('./routes/privateRoutes');
 const publicRoutes = require('./routes/publicRoutes');
 const userRoutes = require('./routes/userRoutes');
-const monsterRoutes = require('./routes/monsterRoutes');
-const runeInstanceRoutes = require('./routes/runeInstanceRoutes');
-const buildingRoutes = require('./routes/buildingRoutes');
-const buildingInstanceRoutes = require('./routes/buildingInstanceRoutes');
-const homunculusSkillRoutes = require('./routes/homunculusSkillRoutes');
-const homunculusSkill_monstersRoutes = require('./routes/homunculusSkill_monstersRoutes');
-const monster_skillsRoutes = require('./routes/monster_skillsRoutes');
-const monster_sourceRoutes = require('./routes/monster_sourceRoutes');
-const monsterInstanceRoutes = require('./routes/monsterInstanceRoutes');
-const monsterInstance_tagsRoutes = require('./routes/monsterInstance_tagsRoutes');
-const monsterLeaderSkillRoutes = require('./routes/monsterLeaderSkillRoutes');
-const monsterSkillRoutes = require('./routes/monsterSkillRoutes');
-const monsterSkill_scalingStatsRoutes = require('./routes/monsterSkill_scalingStatsRoutes');
-const monsterSkill_skillEffectRoutes = require('./routes/monsterSkill_skillEffectRoutes');
-const monsterSkillEffectRoutes = require('./routes/monsterSkillEffectRoutes');
-const monsterSkillEffectDetailRoutes = require('./routes/monsterSkillEffectDetailRoutes');
-const monsterSkillScalingStatRoutes = require('./routes/monsterSkillScalingStatRoutes');
-const monsterSourceRoutes = require('./routes/monsterSourceRoutes');
-const monsterTagRoutes = require('./routes/monsterTagRoutes');
+
+
+
+const monsterRoutes = require('./routes/Bestiary/monsterRoutes');
+const buildingRoutes = require('./routes/Bestiary/buildingRoutes');
+const homunculusSkillRoutes = require('./routes/Bestiary/homunculusSkillRoutes');
+const monsterLeaderSkillRoutes = require('./routes/Bestiary/monsterLeaderSkillRoutes');
+const monsterSkillRoutes = require('./routes/Bestiary/monsterSkillRoutes');
+const monsterSkillEffectRoutes = require('./routes/Bestiary/monsterSkillEffectRoutes');
+const monsterSkillEffectDetailRoutes = require('./routes/Bestiary/monsterSkillEffectDetailRoutes');
+const monsterSkillScalingStatRoutes = require('./routes/Bestiary/monsterSkillScalingStatRoutes');
+const monsterSourceRoutes = require('./routes/Bestiary/monsterSourceRoutes');
+const monsterTagRoutes = require('./routes/Bestiary/monsterTagRoutes');
+
+
+const instanceBattleRoutes = require('./routes/Instance/instanceBattleRoutes')
+const instanceBuildingRoutes = require('./routes/Instance/instanceBuildingRoutes')
+const instanceMonsterRoutes = require('./routes/Instance/instanceMonsterRoutes')
+const instanceRuneRoutes = require('./routes/Instance/instanceRuneRoutes')
+const instanceWizardRoutes = require('./routes/Instance/instanceWizardRoutes')
+
+
+// const masterBattleRoutes = require('./routes/Master/masterBattleRoutes')
+const masterBuildingRoutes = require('./routes/Master/masterBuildingRoutes')
+const masterMonsterRoutes = require('./routes/Master/masterMonsterRoutes')
+const masterRuneRoutes = require('./routes/Master/masterRuneRoutes')
+const masterWizardRoutes = require('./routes/Master/masterWizardRoutes')
+
 
 
 const config = {
   migrate: false,
+
+
   //privateRoutes,
   //publicRoutes,
 
+  userRoutes,
+
   monsterRoutes,
-  runeInstanceRoutes,
   buildingRoutes,
-  buildingInstanceRoutes,
   homunculusSkillRoutes,
-  homunculusSkill_monstersRoutes,
-  monster_skillsRoutes,
-  monster_sourceRoutes,
-  monsterInstanceRoutes,
-  monsterInstance_tagsRoutes,
   monsterLeaderSkillRoutes,
   monsterSkillRoutes,
-  monsterSkill_scalingStatsRoutes,
-  monsterSkill_skillEffectRoutes,
   monsterSkillEffectRoutes,
   monsterSkillEffectDetailRoutes,
   monsterSkillScalingStatRoutes,
   monsterSourceRoutes,
   monsterTagRoutes,
-  userRoutes,
+
+  instanceBattleRoutes,
+  instanceBuildingRoutes,
+  instanceMonsterRoutes,
+  instanceRuneRoutes,
+  instanceWizardRoutes,
+
+  // masterBattleRoutes,
+  masterBuildingRoutes,
+  masterMonsterRoutes,
+  masterRuneRoutes,
+  masterWizardRoutes,
+
   port: process.env.PORT || '3000',
 };
 

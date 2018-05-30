@@ -54,7 +54,7 @@ const dbService = (environment, migrate) => {
 
       //heres data!
       //
-      await dataLoader.testFirstMonsterColumn(database);
+      await dataLoader.loadBestiaryData(database);
       successfulDBStart();
     } catch (err) {
       errorDBStart(err);

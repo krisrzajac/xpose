@@ -26,27 +26,33 @@ const server = http.Server(app);
 
 
 
-const monsterRoutes = mapRoutes(config.monsterRoutes, 'server/controllers/');
+const monsterRoutes = mapRoutes(config.monsterRoutes, 'server/controllers/Bestiary/');
+const buildingRoutes = mapRoutes(config.buildingRoutes, 'server/controllers/Bestiary/');
+const homunculusSkillRoutes = mapRoutes(config.homunculusSkillRoutes, 'server/controllers/Bestiary/');
+const monsterLeaderSkillRoutes = mapRoutes(config.monsterLeaderSkillRoutes, 'server/controllers/Bestiary/');
+const monsterSkillRoutes = mapRoutes(config.monsterSkillRoutes, 'server/controllers/Bestiary/');
+const monsterSkillEffectRoutes = mapRoutes(config.monsterSkillEffectRoutes, 'server/controllers/Bestiary/');
+const monsterSkillEffectDetailRoutes = mapRoutes(config.monsterSkillEffectDetailRoutes, 'server/controllers/Bestiary/');
+const monsterSkillScalingStatRoutes = mapRoutes(config.monsterSkillScalingStatRoutes, 'server/controllers/Bestiary/');
+const monsterSourceRoutes = mapRoutes(config.monsterSourceRoutes, 'server/controllers/Bestiary/');
+const monsterTagRoutes = mapRoutes(config.monsterTagRoutes, 'server/controllers/Bestiary/');
 
-//const runeInstanceRoutes = mapRoutes(config.runeInstanceRoutes, 'server/controllers/');
-//const buildingInstanceRoutes = mapRoutes(config.buildingInstanceRoutes, 'server/controllers/');
-//const monsterInstanceRoutes = mapRoutes(config.monsterInstanceRoutes, 'server/controllers/');
-//const monsterInstance_tagsRoutes = mapRoutes(config.monsterInstance_tagsRoutes, 'server/controllers/');
-const buildingRoutes = mapRoutes(config.buildingRoutes, 'server/controllers/');
-const homunculusSkillRoutes = mapRoutes(config.homunculusSkillRoutes, 'server/controllers/');
-const monsterLeaderSkillRoutes = mapRoutes(config.monsterLeaderSkillRoutes, 'server/controllers/');
-const monsterSkillRoutes = mapRoutes(config.monsterSkillRoutes, 'server/controllers/');
-const monsterSkillEffectRoutes = mapRoutes(config.monsterSkillEffectRoutes, 'server/controllers/');
-const monsterSkillEffectDetailRoutes = mapRoutes(config.monsterSkillEffectDetailRoutes, 'server/controllers/');
-const monsterSkillScalingStatRoutes = mapRoutes(config.monsterSkillScalingStatRoutes, 'server/controllers/');
-const monsterSourceRoutes = mapRoutes(config.monsterSourceRoutes, 'server/controllers/');
-const monsterTagRoutes = mapRoutes(config.monsterTagRoutes, 'server/controllers/');
+
+
+const instanceBattleRoutes = mapRoutes(config.instanceBattleRoutes, 'server/controllers/Instance/');
+const instanceBuildingRoutes = mapRoutes(config.instanceBuildingRoutes, 'server/controllers/Instance/');
+const instanceMonsterRoutes = mapRoutes(config.instanceMonsterRoutes, 'server/controllers/Instance/');
+const instanceRuneRoutes = mapRoutes(config.instanceRuneRoutes, 'server/controllers/Instance/');
+const instanceWizardRoutes = mapRoutes(config.instanceWizardRoutes, 'server/controllers/Instance/');
+
+const masterBuildingRoutes = mapRoutes(config.masterBuildingRoutes, 'server/controllers/Master/');
+const masterMonsterRoutes = mapRoutes(config.masterMonsterRoutes, 'server/controllers/Master/');
+const masterRuneRoutes = mapRoutes(config.masterRuneRoutes, 'server/controllers/Master/');
+const masterWizardRoutes = mapRoutes(config.masterWizardRoutes, 'server/controllers/Master/');
+
+
+
 const userRoutes = mapRoutes(config.userRoutes, 'server/controllers/');
-// const homunculusSkill_monstersRoutes = mapRoutes(config.homunculusSkill_monstersRoutes, 'server/controllers/');
-// const monster_skillsRoutes = mapRoutes(config.monster_skillsRoutes, 'server/controllers/');
-// const monster_sourceRoutes = mapRoutes(config.monster_sourceRoutes, 'server/controllers/');
-// const monsterSkill_scalingStatsRoutes = mapRoutes(config.monsterSkill_scalingStatsRoutes, 'server/controllers/');
-// const monsterSkill_skillEffectRoutes = mapRoutes(config.monsterSkill_skillEffectRoutes, 'server/controllers/');
 
 
 
@@ -77,9 +83,6 @@ app.use(bodyParser.json());
 
 
 // fill routes for express appliction
-//app.use('/api', runeInstanceRoutes);
-//app.use('/api', buildingInstanceRoutes);
-//app.use('/api', monsterInstanceRoutes);
 
 app.use('/api', monsterRoutes);
 app.use('/api', buildingRoutes);
@@ -93,12 +96,23 @@ app.use('/api', monsterSourceRoutes);
 app.use('/api', monsterTagRoutes);
 app.use('/api', userRoutes);
 
-//app.use('/api', monster_skillsRoutes);
-//app.use('/api', monster_sourceRoutes);
-//app.use('/api', monsterSkill_scalingStatsRoutes);
-//app.use('/api', monsterSkill_skillEffectRoutes);
-//app.use('/api', homunculusSkill_monstersRoutes);
-//app.use('/api', monsterInstance_tagsRoutes);
+//
+
+app.use('/api', instanceBattleRoutes);
+app.use('/api', instanceBuildingRoutes);
+app.use('/api', instanceMonsterRoutes);
+app.use('/api', instanceRuneRoutes);
+app.use('/api', instanceWizardRoutes);
+
+//
+
+app.use('/api', masterBuildingRoutes);
+app.use('/api', masterMonsterRoutes);
+app.use('/api', masterRuneRoutes);
+app.use('/api', masterWizardRoutes);
+
+
+
 server.listen(config.port, () => {
   if (environment !== 'production' &&
     environment !== 'development' &&
