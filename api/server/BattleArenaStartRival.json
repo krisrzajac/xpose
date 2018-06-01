@@ -1,0 +1,308 @@
+{
+    "command": "BattleArenaStart",
+    "ret_code": 0,
+    "wizard_info":
+    {
+        "wizard_id": 14442716,
+        "wizard_name": "izokizur",
+        "wizard_mana": 145809,
+        "wizard_crystal": 854,
+        "wizard_crystal_paid": 396,
+        "wizard_last_login": "2018-05-03 08:42:31",
+        "wizard_last_country": "US",
+        "wizard_last_lang": "en",
+        "wizard_level": 50,
+        "experience": 3800000,
+        "wizard_energy": 90,
+        "energy_max": 90,
+        "energy_per_min": 0.218,
+        "next_energy_gain": 0,
+        "arena_energy": 3,
+        "arena_energy_max": 10,
+        "arena_energy_next_gain": 719,
+        "unit_slots":
+        {
+            "number": 120
+        },
+        "rep_unit_id": 10543776999,
+        "rep_assigned": 1,
+        "pvp_event": 0,
+        "mail_box_event": 0,
+        "social_point_current": 570,
+        "social_point_max": 3000,
+        "honor_point": 396,
+        "guild_point": 502,
+        "darkportal_energy": 3,
+        "darkportal_energy_max": 10,
+        "costume_point": 89,
+        "costume_point_max": 9999,
+        "honor_medal": 12,
+        "honor_mark": 77,
+        "event_coin": 0,
+        "lobby_master_id": 1001,
+        "emblem_master_id": 0
+    },
+    "pvp_info":
+    {
+        "wizard_id": 14442716,
+        "arena_win": 19475,
+        "arena_lose": 16771,
+        "arena_score": 1445,
+        "attack_score": 2860,
+        "win_streak": 0,
+        "rating_id": 2003,
+        "win_streak_update_remained": 0,
+        "rating_remained": 363323,
+        "is_new": 0,
+        "prev_rating_id": 0
+    },
+    "unit_id_list": [
+    {
+        "unit_id": 11053018229
+    },
+    {
+        "unit_id": 6104922050
+    },
+    {
+        "unit_id": 5369641677
+    },
+    {
+        "unit_id": 6479556599
+    }],
+    "opp_unit_list": [
+    {
+        "pos_id": 1,
+        "unit_info":
+        {
+            "unit_id": 5001,
+            "wizard_id": 5001,
+            "island_id": 0,
+            "pos_x": 0,
+            "pos_y": 0,
+            "building_id": null,
+            "unit_master_id": 10911,
+            "unit_level": 33,
+            "class": 5,
+            "con": 973,
+            "atk": 342,
+            "def": 430,
+            "spd": 104,
+            "resist": 18,
+            "accuracy": 0,
+            "critical_rate": 15,
+            "critical_damage": 50,
+            "experience": 339842,
+            "exp_gained": 0,
+            "exp_gain_rate": 0,
+            "skills": [
+                [
+                    1901,
+                    1
+                ],
+                [
+                    1906,
+                    1
+                ],
+                [
+                    1911,
+                    1
+                ]
+            ],
+            "runes": [],
+            "costume_master_id": 0,
+            "trans_items": [],
+            "attribute": 1,
+            "create_time": null,
+            "source": 0,
+            "homunculus": 0,
+            "homunculus_name": "",
+            "lair_id": 0
+        }
+    },
+    {
+        "pos_id": 2,
+        "unit_info":
+        {
+            "unit_id": 5002,
+            "wizard_id": 5001,
+            "island_id": 0,
+            "pos_x": 0,
+            "pos_y": 0,
+            "building_id": null,
+            "unit_master_id": 11311,
+            "unit_level": 33,
+            "class": 5,
+            "con": 808,
+            "atk": 498,
+            "def": 537,
+            "spd": 132,
+            "resist": 18,
+            "accuracy": 0,
+            "critical_rate": 15,
+            "critical_damage": 50,
+            "experience": 339842,
+            "exp_gained": 0,
+            "exp_gain_rate": 0,
+            "skills": [
+                [
+                    2301,
+                    1
+                ],
+                [
+                    2306,
+                    1
+                ],
+                [
+                    2311,
+                    1
+                ]
+            ],
+            "runes": [],
+            "costume_master_id": 0,
+            "trans_items": [],
+            "attribute": 1,
+            "create_time": null,
+            "source": 0,
+            "homunculus": 0,
+            "homunculus_name": "",
+            "lair_id": 0
+        }
+    },
+    {
+        "pos_id": 3,
+        "unit_info":
+        {
+            "unit_id": 5003,
+            "wizard_id": 5001,
+            "island_id": 0,
+            "pos_x": 0,
+            "pos_y": 0,
+            "building_id": null,
+            "unit_master_id": 10712,
+            "unit_level": 32,
+            "class": 5,
+            "con": 808,
+            "atk": 481,
+            "def": 385,
+            "spd": 117,
+            "resist": 18,
+            "accuracy": 0,
+            "critical_rate": 15,
+            "critical_damage": 50,
+            "experience": 296794,
+            "exp_gained": 0,
+            "exp_gain_rate": 0,
+            "skills": [
+                [
+                    1802,
+                    1
+                ],
+                [
+                    1807,
+                    1
+                ],
+                [
+                    1812,
+                    1
+                ]
+            ],
+            "runes": [],
+            "costume_master_id": 0,
+            "trans_items": [],
+            "attribute": 2,
+            "create_time": null,
+            "source": 0,
+            "homunculus": 0,
+            "homunculus_name": "",
+            "lair_id": 0
+        }
+    },
+    {
+        "pos_id": 4,
+        "unit_info":
+        {
+            "unit_id": 5004,
+            "wizard_id": 5001,
+            "island_id": 0,
+            "pos_x": 0,
+            "pos_y": 0,
+            "building_id": null,
+            "unit_master_id": 10913,
+            "unit_level": 33,
+            "class": 5,
+            "con": 658,
+            "atk": 430,
+            "def": 567,
+            "spd": 104,
+            "resist": 18,
+            "accuracy": 0,
+            "critical_rate": 15,
+            "critical_damage": 50,
+            "experience": 339842,
+            "exp_gained": 0,
+            "exp_gain_rate": 0,
+            "skills": [
+                [
+                    1903,
+                    1
+                ],
+                [
+                    1908,
+                    1
+                ],
+                [
+                    1913,
+                    1
+                ]
+            ],
+            "runes": [],
+            "costume_master_id": 0,
+            "trans_items": [],
+            "attribute": 3,
+            "create_time": null,
+            "source": 0,
+            "homunculus": 0,
+            "homunculus_name": "",
+            "lair_id": 0
+        }
+    }],
+    "unit_drop_list": [
+    {
+        "unit_id": 5001,
+        "unit_level": 33,
+        "drop_mana": 170,
+        "drop_energy": 0,
+        "drop_crystal": 0,
+        "jackpot": 0
+    },
+    {
+        "unit_id": 5002,
+        "unit_level": 33,
+        "drop_mana": 218,
+        "drop_energy": 0,
+        "drop_crystal": 0,
+        "jackpot": 0
+    },
+    {
+        "unit_id": 5003,
+        "unit_level": 32,
+        "drop_mana": 898,
+        "drop_energy": 0,
+        "drop_crystal": 0,
+        "jackpot": 1
+    },
+    {
+        "unit_id": 5004,
+        "unit_level": 33,
+        "drop_mana": 213,
+        "drop_energy": 0,
+        "drop_crystal": 0,
+        "jackpot": 0
+    }],
+    "tower_damage": 2700,
+    "battle_key": 1525309477,
+    "ts_val": 1187341997,
+    "tvalue": 1525309477,
+    "tvaluelocal": 1525251877,
+    "tzone": "America/Los_Angeles"
+}

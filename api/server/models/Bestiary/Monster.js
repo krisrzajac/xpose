@@ -263,7 +263,10 @@ const Monster = sequelize.define('monster', {
     }
   }
 }, {
-  tableName: 'monster'
+  tableName
+
+  
+
 });
 Monster.associate = function (models) {
   Monster.belongsToMany(models.monsterSkill, {
@@ -272,8 +275,7 @@ Monster.associate = function (models) {
   Monster.belongsToMany(models.homunculusSkill, {
     through: "HomunculusSkill_Monsters"
   });
-  Monster.belongsTo(models.monsterLeaderSkill, {
-  })
+  Monster.belongsTo(models.monsterLeaderSkill, {})
 
 }
 module.exports = Monster

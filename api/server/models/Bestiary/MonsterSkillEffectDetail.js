@@ -90,7 +90,10 @@ const MonsterSkillEffectDetail = sequelize.define('monsterSkillEffectDetail', {
     allowNull: false
   }
 }, {
-  tableName: 'monsterSkillEffectDetail'
+  tableName
+
+  
+
 });
 
 

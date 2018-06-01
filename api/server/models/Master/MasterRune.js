@@ -17,9 +17,13 @@ const MasterRune = sequelize.define('masterRune', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true
   },
 }, {
-  tableName: 'masterRune',
+  tableName
+
+  
+,
 });
 
 MasterRune.associate = function (models) {
@@ -31,9 +35,7 @@ MasterRune.associate = function (models) {
     // as: 'wizard_id',
   });
 
-  MasterRune.belongsTo(models.instanceRune,
-  {
-  })
+  MasterRune.belongsTo(models.instanceRune, {})
 };
 
 

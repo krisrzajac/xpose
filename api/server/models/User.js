@@ -23,6 +23,8 @@ const User = sequelize.define('User', {
 }, {
   hooks,
   tableName,
+  
+
 });
 
 // eslint-disable-next-line

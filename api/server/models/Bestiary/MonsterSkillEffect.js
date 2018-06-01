@@ -38,7 +38,10 @@ const MonsterSkillEffect = sequelize.define('monsterSkillEffect', {
     allowNull: true
   }
 }, {
-  tableName: 'monsterSkillEffect'
+  tableName
+
+  
+
 });
 
 MonsterSkillEffect.associate = function (models) {

@@ -7,11 +7,15 @@ const dbService = (environment, migrate) => {
 
   const dropDB = () => database.drop();
 
+  const dropDBCascade = () => database.drop({
+    cascade: true
+  });
+
   const syncDB = () => database.sync();
 
-  const godDropDB = () => {
-    database.query("DROP SCHEMA public CASCADE;");
-    database.query("CREATE SCHEMA public;");
+  const godDropDB = async () => {
+    await database.query("DROP SCHEMA public CASCADE;");
+    await database.query("CREATE SCHEMA public;");
   }
 
   const assDB = () => {
@@ -48,14 +52,16 @@ const dbService = (environment, migrate) => {
   const startMigrateFalse = async () => {
     try {
       // await dropDB();
-      await godDropDB();
+      // await dropDBCascade();
+      // await godDropDB();
       await assDB();
       await syncDB();
-
+      
       //heres data!
       //
-      await dataLoader.loadBestiaryData(database);
-      successfulDBStart();
+      // await dataLoader.loadBestiaryData(database);
+      await dataLoader.loadArenaDataNonAPI(database);
+      await successfulDBStart();
     } catch (err) {
       errorDBStart(err);
     }

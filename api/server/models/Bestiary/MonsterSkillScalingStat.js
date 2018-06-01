@@ -34,7 +34,10 @@ const MonsterSkillScalingStat = sequelize.define('monsterSkillScalingStat', {
     allowNull: true
   }
 }, {
-  tableName: 'monsterSkillScalingStat'
+  tableName
+
+  
+
 });
 
 MonsterSkillScalingStat.associate = function (models) {

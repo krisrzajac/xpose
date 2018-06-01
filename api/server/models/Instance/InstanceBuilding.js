@@ -16,7 +16,8 @@ const InstanceBuilding = sequelize.define('instanceBuilding', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
 
   level: {
@@ -33,25 +34,29 @@ const InstanceBuilding = sequelize.define('instanceBuilding', {
   //   }
   // }
   deco_id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.BIGINT,
     allowNull: false
   },
 }, {
-  tableName: 'instanceBuilding'
+  tableName
+
+  
+
 });
 InstanceBuilding.associate = function (models) {
 
   InstanceBuilding.belongsTo(models.instanceWizard, {
-    // as: 'wizard_id',
+    // as: "instanceWizardId",
   });
 
   InstanceBuilding.belongsTo(models.instanceBattle, {
     //
+    // as: "instanceBattleId",
   });
 
   InstanceBuilding.belongsTo(models.building, {
-    as: 'master_id',
- 
+    // as: 'master_id',
+
 
   });
 }

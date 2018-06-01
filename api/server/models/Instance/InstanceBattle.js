@@ -16,7 +16,8 @@ const InstanceBattle = sequelize.define('instanceBattle', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
 
   command: {
@@ -39,25 +40,28 @@ const InstanceBattle = sequelize.define('instanceBattle', {
     allowNull: false
   },
 }, {
-  tableName: 'instanceBattle'
+  tableName
+
+  
+
 });
 InstanceBattle.associate = function (models) {
 
   InstanceBattle.hasMany(models.instanceWizard, {
-
+    // as:"instanceWizardId",
   })
 
   InstanceBattle.hasMany(models.instanceBuilding, {
-
+    // as:"instanceBuildingId",
   })
 
 
   InstanceBattle.hasMany(models.instanceMonster, {
-
+    // as:"instanceMonsterId"
   })
 
   InstanceBattle.hasMany(models.instanceRune, {
-    
+    // as:"instanceRuneId"
   })
 
 }

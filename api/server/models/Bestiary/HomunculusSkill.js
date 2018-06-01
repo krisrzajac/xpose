@@ -35,6 +35,8 @@ const HomunculusSkill = sequelize.define('homunculusSkill', {
   // },
 }, {
   tableName,
+  
+
 });
 
 HomunculusSkill.associate = function (models) {

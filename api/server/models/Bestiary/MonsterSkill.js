@@ -75,7 +75,10 @@ const MonsterSkill = sequelize.define('monsterSkill', {
     defaultValue: []
   }
 }, {
-  tableName: 'monsterSkill'
+  tableName
+
+  
+
 });
 
 MonsterSkill.associate = function (models) {

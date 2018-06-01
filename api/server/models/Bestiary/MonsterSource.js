@@ -42,6 +42,9 @@ const MonsterSource = sequelize.define('monsterSource', {
     allowNull: false
   }
 }, {
-  tableName: 'monsterSource'
+  tableName
+
+  
+
 });
 module.exports = MonsterSource

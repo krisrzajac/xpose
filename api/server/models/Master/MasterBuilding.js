@@ -16,27 +16,27 @@ const MasterBuilding = sequelize.define('masterBuilding', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
 
 
 }, {
-  tableName: 'masterBuilding'
+  tableName
+
+  
+
 });
 MasterBuilding.associate = function (models) {
 
   MasterBuilding.belongsTo(models.masterWizard, {
     // as: 'wizard_id',
   });
-  
-  MasterBuilding.belongsTo(models.instanceBuilding,
-  {
+
+  MasterBuilding.belongsTo(models.instanceBuilding, {
     //
   })
 
-  MasterBuilding.belongsTo(models.building, {
-    as: 'master_id',
-  
-  });
+  MasterBuilding.belongsTo(models.building);
 }
 module.exports = MasterBuilding

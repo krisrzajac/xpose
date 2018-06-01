@@ -64,7 +64,10 @@ const Building = sequelize.define('building', {
     allowNull: true
   }
 }, {
-  tableName: 'building'
+  tableName
+
+  
+
 });
 
 

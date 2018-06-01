@@ -26,6 +26,9 @@ const MonsterTag = sequelize.define('monsterTag', {
     allowNull: false
   }
 }, {
-  tableName: 'monsterTag'
+  tableName
+
+  
+
 });
 module.exports = MonsterTag

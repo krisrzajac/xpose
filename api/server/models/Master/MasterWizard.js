@@ -16,11 +16,12 @@ const MasterWizard = sequelize.define('masterWizard', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
 
 }, {
-  tableName: 'masterWizard'
+  tableName
 });
 MasterWizard.associate = function (models) {
 

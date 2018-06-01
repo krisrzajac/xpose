@@ -16,7 +16,8 @@ const InstanceWizard = sequelize.define('instanceWizard', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
 
   wizard_id: {
@@ -25,7 +26,7 @@ const InstanceWizard = sequelize.define('instanceWizard', {
   },
 
   wizard_name: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: true
   },
 
@@ -36,7 +37,10 @@ const InstanceWizard = sequelize.define('instanceWizard', {
 
 
 }, {
-  tableName: 'instanceWizard'
+  tableName
+
+  
+
 });
 InstanceWizard.associate = function (models) {
 
@@ -53,6 +57,7 @@ InstanceWizard.associate = function (models) {
 
   InstanceWizard.belongsTo(models.instanceBattle, {
     //
+    // as: "instanceBattleId",
   })
 }
 module.exports = InstanceWizard

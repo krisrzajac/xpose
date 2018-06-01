@@ -15,12 +15,16 @@ const MasterMonster = sequelize.define('masterMonster', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
-  
+
 
 }, {
-  tableName: 'masterMonster'
+  tableName
+
+  
+
 });
 
 MasterMonster.associate = function (models) {

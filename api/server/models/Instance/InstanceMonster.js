@@ -15,17 +15,22 @@ const InstanceMonster = sequelize.define('instanceMonster', {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
+  },
+  pos_id: {
+    type: Sequelize.INTEGER,
+    allowNull: true
   },
   unit_id: {
+    type: Sequelize.BIGINT,
+    allowNull: false
+  },
+  // Redundant, since we are gonna link this to instanceWizard through hasMany
+  wizard_id: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  //Redundant, since we are gonna link this to instanceWizard through hasMany
-  // wizard_id: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false
-  // },
 
   //COM2US ID : This is 'name' of monster, links to monster table
   unit_master_id: {
@@ -103,55 +108,54 @@ const InstanceMonster = sequelize.define('instanceMonster', {
   //
   skill_0_1: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   skill_1_1: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   skill_2_1: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   skill_3_1: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
 
 
-  
   //************************************************************************************************************
   //Rune subtotals for the monster in this instance - 
   //************************************************************************************************************
-  
+
   rune_attack: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   rune_crit_damage: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   rune_crit_rate: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   rune_defense: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   rune_hp: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   rune_resistance: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   rune_speed: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   //TODO: Think this one through how to store sets- 
   // rune_sets: {
@@ -165,7 +169,7 @@ const InstanceMonster = sequelize.define('instanceMonster', {
     allowNull: false
   },
 
-  
+
   homunculus_name: {
     type: Sequelize.TEXT,
     allowNull: true
@@ -189,7 +193,10 @@ const InstanceMonster = sequelize.define('instanceMonster', {
     allowNull: true
   },
 }, {
-  tableName: 'instanceMonster'
+  tableName
+
+  
+
 });
 
 InstanceMonster.associate = function (models) {
@@ -197,11 +204,11 @@ InstanceMonster.associate = function (models) {
     // as: "rune_id",
   })
   InstanceMonster.belongsTo(models.instanceWizard, {
-    // as: "wizard_id",
+    // as: "instanceWizardId"
   })
-  InstanceMonster.belongsTo(models.instanceBattle,
-  {
+  InstanceMonster.belongsTo(models.instanceBattle, {
     // as: "battle_id",
+    // as: "instanceBattleId"
   })
 }
 

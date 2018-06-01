@@ -17,15 +17,16 @@ const InstanceRune = sequelize.define('instanceRune', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true
   },
   rune_id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.BIGINT,
     allowNull: false,
   },
-  // wizard_id: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false
-  // },
+  wizard_id: {
+    type: Sequelize.BIGINT,
+    allowNull: false
+  },
   occupied_type: {
     // redundant? this ends up same value as 'unit_id' linked through association
     type: Sequelize.INTEGER,
@@ -33,7 +34,7 @@ const InstanceRune = sequelize.define('instanceRune', {
   },
   occupied_id: {
     // Change to boolean? 1 is on monster, 2 is in inventory or something. 0 never comes up?
-    type: Sequelize.INTEGER,
+    type: Sequelize.BIGINT,
     allowNull: false,
   },
   slot_no: {
@@ -51,7 +52,7 @@ const InstanceRune = sequelize.define('instanceRune', {
     // stars
     // TODO:add validation / constraints for 1-6
     type: Sequelize.INTEGER,
-    allowNull: false,
+      allowNull: false,
   },
   set_id: {
     // set type - sets:{1:'Energy',2:'Guard',3:'Swift',4:'Blade',5:'Rage',6:'Focus',7:'Endure',8:'Fatal',10:'Despair',11:'Vampire',13:'Violent',14:'Nemesis',15:'Will',16:'Shield',17:'Revenge',18:'Destroy',19:'Fight',20:'Determination',21:'Enhance',22:'Accuracy',23:'Tolerance'},
@@ -312,23 +313,28 @@ const InstanceRune = sequelize.define('instanceRune', {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
     allowNull: true,
   },
-  
+
 }, {
-  tableName: 'instanceRune',
+  tableName
+
+  
+,
 });
 
 InstanceRune.associate = function (models) {
   InstanceRune.belongsTo(models.instanceMonster, {
     // as: 'unit_id',
+    // as: "instanceMonsterId",
   });
 
   InstanceRune.belongsTo(models.instanceWizard, {
     // as: 'wizard_id',
+    // as: "instanceWizardId",
   });
 
-  InstanceRune.belongsTo(models.instanceBattle,
-  {
+  InstanceRune.belongsTo(models.instanceBattle, {
     // as: 'battle_id'
+    // as: "instanceBattleId",
   })
 };
 

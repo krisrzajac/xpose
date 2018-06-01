@@ -38,6 +38,9 @@ const MonsterLeaderSkill = sequelize.define('monsterLeaderSkill', {
     allowNull: false
   }
 }, {
-  tableName: 'monsterLeaderSkill'
+  tableName
+
+  
+
 });
 module.exports = MonsterLeaderSkill
