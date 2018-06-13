@@ -1,5 +1,5 @@
 const instanceWizard = require('../../models/Instance/instanceWizard');
-
+const masterWizard = require('../../models/Master/masterWizard');
 const instanceWizardController = () => {
   const create = async (req, res) => {
     // body is part of a form-data

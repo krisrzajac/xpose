@@ -37,7 +37,9 @@ const InstanceWizard = sequelize.define('instanceWizard', {
 
 
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
+
 
   
 

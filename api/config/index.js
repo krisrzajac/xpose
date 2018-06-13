@@ -1,7 +1,7 @@
 const privateRoutes = require('./routes/privateRoutes');
 const publicRoutes = require('./routes/publicRoutes');
 const userRoutes = require('./routes/userRoutes');
-
+const uploadRoutes = require('./routes/uploadRoutes');
 
 
 const monsterRoutes = require('./routes/Bestiary/monsterRoutes');
@@ -16,29 +16,29 @@ const monsterSourceRoutes = require('./routes/Bestiary/monsterSourceRoutes');
 const monsterTagRoutes = require('./routes/Bestiary/monsterTagRoutes');
 
 
-const instanceBattleRoutes = require('./routes/Instance/instanceBattleRoutes')
-const instanceBuildingRoutes = require('./routes/Instance/instanceBuildingRoutes')
-const instanceMonsterRoutes = require('./routes/Instance/instanceMonsterRoutes')
-const instanceRuneRoutes = require('./routes/Instance/instanceRuneRoutes')
-const instanceWizardRoutes = require('./routes/Instance/instanceWizardRoutes')
+const instanceBattleRoutes = require('./routes/Instance/instanceBattleRoutes');
+const instanceBuildingRoutes = require('./routes/Instance/instanceBuildingRoutes');
+const instanceMonsterRoutes = require('./routes/Instance/instanceMonsterRoutes');
+const instanceRuneRoutes = require('./routes/Instance/instanceRuneRoutes');
+const instanceWizardRoutes = require('./routes/Instance/instanceWizardRoutes');
 
 
 // const masterBattleRoutes = require('./routes/Master/masterBattleRoutes')
-const masterBuildingRoutes = require('./routes/Master/masterBuildingRoutes')
-const masterMonsterRoutes = require('./routes/Master/masterMonsterRoutes')
-const masterRuneRoutes = require('./routes/Master/masterRuneRoutes')
-const masterWizardRoutes = require('./routes/Master/masterWizardRoutes')
-
+const masterBuildingRoutes = require('./routes/Master/masterBuildingRoutes');
+const masterMonsterRoutes = require('./routes/Master/masterMonsterRoutes');
+const masterRuneRoutes = require('./routes/Master/masterRuneRoutes');
+const masterWizardRoutes = require('./routes/Master/masterWizardRoutes');
 
 
 const config = {
   migrate: false,
 
 
-  //privateRoutes,
-  //publicRoutes,
+  // privateRoutes,
+  // publicRoutes,
 
   userRoutes,
+  uploadRoutes,
 
   monsterRoutes,
   buildingRoutes,

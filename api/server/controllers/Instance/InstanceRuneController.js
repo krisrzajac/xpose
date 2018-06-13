@@ -1,5 +1,5 @@
 const instanceRune = require('../../models/Instance/instanceRune');
-
+const masterRune = require('../../models/Master/masterRune')
 const instanceRuneController = () => {
   const create = async (req, res) => {
     // body is part of a form-data

@@ -1,5 +1,5 @@
 const instanceBuilding = require('../../models/Instance/instanceBuilding');
-
+const masterBuilding = require('../../models/Master/masterBuilding')
 const instanceBuildingController = () => {
   const create = async (req, res) => {
     // body is part of a form-data

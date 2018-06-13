@@ -53,9 +53,9 @@ const masterWizardRoutes = mapRoutes(config.masterWizardRoutes, 'server/controll
 
 
 const userRoutes = mapRoutes(config.userRoutes, 'server/controllers/');
+const uploadRoutes = mapRoutes(config.uploadRoutes, 'server/controllers/')
 
-
-
+//Start server based on environment and config vars
 const DB = dbService(environment, config.migrate).start();
 
 
@@ -71,6 +71,8 @@ app.use(helmet({
   ieNoOpen: false,
 }));
 
+//set limit higher
+app.use(bodyParser({limit: '50mb'}));
 // parsing the request bodys
 app.use(bodyParser.urlencoded({
   extended: false,
@@ -84,6 +86,10 @@ app.use(bodyParser.json());
 
 // fill routes for express appliction
 
+app.use('/api', userRoutes);
+app.use('/api', uploadRoutes);
+
+
 app.use('/api', monsterRoutes);
 app.use('/api', buildingRoutes);
 app.use('/api', homunculusSkillRoutes);
@@ -94,7 +100,7 @@ app.use('/api', monsterSkillEffectDetailRoutes);
 app.use('/api', monsterSkillScalingStatRoutes);
 app.use('/api', monsterSourceRoutes);
 app.use('/api', monsterTagRoutes);
-app.use('/api', userRoutes);
+
 
 //
 
@@ -121,5 +127,9 @@ server.listen(config.port, () => {
     console.error(`NODE_ENV is set to ${environment}, but only production and development are valid.`);
     process.exit(1);
   }
+
   return DB;
 });
+
+
+module.exports = app;

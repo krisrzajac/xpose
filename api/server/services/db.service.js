@@ -2,34 +2,38 @@ const database = require('../../config/database');
 
 const dataLoader = require('../dataLoader');
 
+const repl = require('repl');
+
 const dbService = (environment, migrate) => {
   const authenticateDB = () => database.authenticate();
 
   const dropDB = () => database.drop();
 
   const dropDBCascade = () => database.drop({
-    cascade: true
+    cascade: true,
   });
 
   const syncDB = () => database.sync();
 
   const godDropDB = async () => {
-    await database.query("DROP SCHEMA public CASCADE;");
-    await database.query("CREATE SCHEMA public;");
-  }
+    await database.query('DROP SCHEMA public CASCADE;');
+    await database.query('CREATE SCHEMA public;');
+  };
 
   const assDB = () => {
-    console.log(database.models)
-    Object.keys(database.models).forEach(function (modelName) {
+    console.log(database.models);
+    Object.keys(database.models).forEach((modelName) => {
       if (database.models[modelName].associate) {
         database.models[modelName].associate(database.models);
       }
     });
-  }
+  };
 
-  const successfulDBStart = () => (
+  const successfulDBStart = () => {
     console.info('connection to the database has been established successfully')
-  );
+    // const replServer = repl.start();
+    // replServer.context.db = database;
+  };
 
   const errorDBStart = (err) => (
     console.info('unable to connect to the database:', err)
@@ -56,11 +60,11 @@ const dbService = (environment, migrate) => {
       // await godDropDB();
       await assDB();
       await syncDB();
-      
-      //heres data!
+
+      // heres data!
       //
       // await dataLoader.loadBestiaryData(database);
-      await dataLoader.loadArenaDataNonAPI(database);
+      // await dataLoader.loadArenaDataNonAPI(database);
       await successfulDBStart();
     } catch (err) {
       errorDBStart(err);
@@ -115,20 +119,20 @@ const dbService = (environment, migrate) => {
 
   const start = async () => {
     switch (environment) {
-    case 'development':
-      await startDev();
-      break;
-    case 'staging':
-      await startStage();
-      break;
-    case 'testing':
-      await startTest();
-      break;
-    case 'production':
-      await startProd();
-      break;
-    default:
-      await wrongEnvironment();
+      case 'development':
+        await startDev();
+        break;
+      case 'staging':
+        await startStage();
+        break;
+      case 'testing':
+        await startTest();
+        break;
+      case 'production':
+        await startProd();
+        break;
+      default:
+        await wrongEnvironment();
     }
   };
 

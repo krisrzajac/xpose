@@ -34,19 +34,21 @@ const HomunculusSkill = sequelize.define('homunculusSkill', {
   //   },
   // },
 }, {
+  freezeTableName: true,
   tableName,
-  
+
+
 
 });
 
 HomunculusSkill.associate = function (models) {
   HomunculusSkill.belongsToMany(models.monster, {
-    through: "HomunculusSkill_Monsters"
-  })
+    through: 'HomunculusSkill_Monsters',
+  });
   HomunculusSkill.belongsTo(models.monsterSkill, {
-    as: "skill"
-  })
-}
+    as: 'skill',
+  });
+};
 
 HomunculusSkill.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());

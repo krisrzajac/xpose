@@ -315,10 +315,11 @@ const InstanceRune = sequelize.define('instanceRune', {
   },
 
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
+
 
   
-,
 });
 
 InstanceRune.associate = function (models) {

@@ -40,7 +40,9 @@ const InstanceBattle = sequelize.define('instanceBattle', {
     allowNull: false
   },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
+
 
   
 

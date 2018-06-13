@@ -24,8 +24,8 @@ const DataLoader = {
 
 
       let thisInstanceBattleId = battleQueryResult.dataValues.id
-      console.log("thisInstanceBattleId " + thisInstanceBattleId)
-      
+      // console.log("thisInstanceBattleId " + thisInstanceBattleId)
+
 
       let wiz1 = await DataBase.models['instanceWizard'].create({
         wizard_id: data.wizard_info.wizard_id,
@@ -88,11 +88,11 @@ const DataLoader = {
           rune.has_speed = hasStats[8] ? true : false
 
           rune.instanceBattleId = thisInstanceBattleId;
-          await console.log("this instance battle ID" + rune.instanceBattleId)
+
           rune.instanceMonsterId = thisMonster.dataValues.id;
-          await console.log(rune.instanceMonsterId);
+
           rune.instanceWizardId = wiz2.dataValues.id
-          await console.log(rune.instanceWizardId);
+
 
           await DataBase.models['instanceRune'].create(
             rune
@@ -104,13 +104,6 @@ const DataLoader = {
         building.instanceBattleId = thisInstanceBattleId;
         building.instanceWizardId = wiz2.dataValues.id;
 
-        let thisBuildingId = await DataBase.models['building'].find({
-          attributes: ['id'],
-          where: {
-            com2us_id: building.master_id,
-          }
-        })
-        building.buildingId = thisBuildingId.dataValues.id;
         await DataBase.models['instanceBuilding'].create(building);
       }
 

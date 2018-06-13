@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // for encrypting our passwords
-//const bcryptSevice = require('../services/bcrypt.service');
+// const bcryptSevice = require('../services/bcrypt.service');
 
 // the DB connection
 const sequelize = require('../../../config/database');
@@ -19,32 +19,33 @@ const MonsterSource = sequelize.define('monsterSource', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   icon_filename: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   farmable_source: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: true
+    allowNull: true,
   },
   meta_order: {
     type: Sequelize.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
-module.exports = MonsterSource
+module.exports = MonsterSource;

@@ -10,10 +10,12 @@ const UserController = () => {
 
     if (body.password === body.password2) {
       try {
+
         const user = await User.create({
           email: body.email,
           password: body.password,
         });
+
         const token = authService().issue({
           id: user.id
         });
@@ -22,6 +24,7 @@ const UserController = () => {
           token,
           user
         });
+        
       } catch (err) {
         console.log(err);
         return res.status(500).json({

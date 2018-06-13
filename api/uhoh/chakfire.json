@@ -1,0 +1,150 @@
+{
+    "url": "https://swarfarm.com/api/bestiary/1170",
+    "pk": 1170,
+    "com2us_id": 21902,
+    "name": "Chakram Dancer",
+    "image_filename": "unit_icon_0045_1_0.png",
+    "element": "Fire",
+    "archetype": "Attack",
+    "base_stars": 4,
+    "obtainable": true,
+    "can_awaken": true,
+    "is_awakened": false,
+    "awaken_bonus": "Leader Skill",
+    "skills": [
+        {
+            "pk": 1944,
+            "com2us_id": 12602,
+            "name": "Crescent Moon Slash",
+            "description": "Attacks the enemy 2 times and deals more damage when the enemy's HP is low. Additionally, if there's Boomerang Warrior included in the ally team, one of Chakram Dancers will attack together with Boomerang Warrior during Boomerang Warrior's turn.",
+            "slot": 1,
+            "cooltime": null,
+            "hits": 2,
+            "passive": false,
+            "max_level": 6,
+            "level_progress_description": "Damage +5%\nDamage +5%\nDamage +5%\nDamage +10%\nDamage +15%\n",
+            "skill_effect": [],
+            "multiplier_formula": "{ATK}*(-1.5*{Target Current HP %} + 3.0)",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 1.0], [\"*\"], [\"TARGET_CUR_HP_RATE\", \"*\", -1.5, \"+\", 3.0]]",
+            "icon_filename": "skill_icon_0016_4_3.png"
+        },
+        {
+            "pk": 1949,
+            "com2us_id": 12607,
+            "name": "Chakram Crush",
+            "description": "Attacks all enemies with chakrams 2 times and stuns them for 1 turn with a 30% chance each.",
+            "slot": 2,
+            "cooltime": 4,
+            "hits": 2,
+            "passive": false,
+            "max_level": 6,
+            "level_progress_description": "Effect Rate +5%\nDamage +10%\nEffect Rate +5%\nDamage +10%\nCooltime Turn -1\n",
+            "skill_effect": [
+                {
+                    "name": "AOE",
+                    "is_buff": true,
+                    "description": "Applies skill to more than one target",
+                    "icon_filename": ""
+                },
+                {
+                    "name": "Stun",
+                    "is_buff": false,
+                    "description": "Enemy is stunned and immobilized for a number of turns",
+                    "icon_filename": "debuff_stun.png"
+                }
+            ],
+            "multiplier_formula": "1.7*{ATK}",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 1.7]]",
+            "icon_filename": "skill_icon_0016_9_3.png"
+        },
+        {
+            "pk": 1954,
+            "com2us_id": 12612,
+            "name": "Precision (Passive)",
+            "description": "Decreases the enemy's Defense for 1 turn with every attack and the Attack Bar of the enemies granted with harmful effects will be decreased by 15% each. The damage that Boomerang Warrior inflicts on the target also decreases the target's Attack Bar by 15% when they attack together. [Automatic Effect]",
+            "slot": 3,
+            "cooltime": null,
+            "hits": 1,
+            "passive": true,
+            "max_level": 1,
+            "level_progress_description": "",
+            "skill_effect": [
+                {
+                    "name": "Decrease ATB",
+                    "is_buff": false,
+                    "description": "Reduces the enemy's attack gauge",
+                    "icon_filename": ""
+                },
+                {
+                    "name": "Decrease DEF",
+                    "is_buff": false,
+                    "description": "Defense is reduced by 70%",
+                    "icon_filename": "debuff_defence_down.png"
+                }
+            ],
+            "multiplier_formula": "",
+            "multiplier_formula_raw": "[]",
+            "icon_filename": "skill_icon_0016_4_4.png"
+        }
+    ],
+    "leader_skill": null,
+    "homunculus_skills": [],
+    "base_hp": 4545,
+    "base_attack": 362,
+    "base_defense": 315,
+    "speed": 102,
+    "crit_rate": 15,
+    "crit_damage": 50,
+    "resistance": 15,
+    "accuracy": 0,
+    "max_lvl_hp": 8400,
+    "max_lvl_attack": 670,
+    "max_lvl_defense": 582,
+    "awakens_from": null,
+    "awakens_to": {
+        "url": "https://swarfarm.com/api/bestiary/1175",
+        "pk": 1175,
+        "name": "Shaina",
+        "element": "Fire"
+    },
+    "awaken_mats_fire_low": 0,
+    "awaken_mats_fire_mid": 20,
+    "awaken_mats_fire_high": 10,
+    "awaken_mats_water_low": 0,
+    "awaken_mats_water_mid": 0,
+    "awaken_mats_water_high": 0,
+    "awaken_mats_wind_low": 0,
+    "awaken_mats_wind_mid": 0,
+    "awaken_mats_wind_high": 0,
+    "awaken_mats_light_low": 0,
+    "awaken_mats_light_mid": 0,
+    "awaken_mats_light_high": 0,
+    "awaken_mats_dark_low": 0,
+    "awaken_mats_dark_mid": 0,
+    "awaken_mats_dark_high": 0,
+    "awaken_mats_magic_low": 0,
+    "awaken_mats_magic_mid": 15,
+    "awaken_mats_magic_high": 5,
+    "source": [
+        {
+            "id": 3,
+            "name": "Legendary Scroll",
+            "description": "",
+            "farmable_source": false
+        },
+        {
+            "id": 5,
+            "name": "Fire Scroll",
+            "description": "",
+            "farmable_source": false
+        },
+        {
+            "id": 38,
+            "name": "Mystical Scroll or Crystal Summon",
+            "description": "",
+            "farmable_source": false
+        }
+    ],
+    "fusion_food": false,
+    "homunculus": false
+}

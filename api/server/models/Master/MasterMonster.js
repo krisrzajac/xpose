@@ -16,27 +16,29 @@ const MasterMonster = sequelize.define('masterMonster', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
 
 
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
 
 MasterMonster.associate = function (models) {
   MasterMonster.hasMany(models.masterRune, {
     // as: "rune_id",
-  })
+  });
   MasterMonster.belongsTo(models.masterWizard, {
     // as: "wizard_id",
-  })
+  });
   MasterMonster.belongsTo(models.instanceMonster, {
+    unique:true,
     //
-  })
-}
+  });
+};
 
-module.exports = MasterMonster
+module.exports = MasterMonster;

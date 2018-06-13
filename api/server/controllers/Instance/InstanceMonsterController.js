@@ -1,5 +1,5 @@
 const instanceMonster = require('../../models/Instance/instanceMonster');
-
+const masterMonster = require('../../models/Master/masterMonster');
 const instanceMonsterController = () => {
   const create = async (req, res) => {
     // body is part of a form-data

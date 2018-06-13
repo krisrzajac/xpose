@@ -38,7 +38,9 @@ const InstanceBuilding = sequelize.define('instanceBuilding', {
     allowNull: false
   },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
+
 
   
 
@@ -55,7 +57,8 @@ InstanceBuilding.associate = function (models) {
   });
 
   InstanceBuilding.belongsTo(models.building, {
-    // as: 'master_id',
+    foreignKey: "master_id",
+    targetKey: "com2us_id",
 
 
   });

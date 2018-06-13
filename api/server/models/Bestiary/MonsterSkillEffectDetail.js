@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // for encrypting our passwords
-//const bcryptSevice = require('../services/bcrypt.service');
+// const bcryptSevice = require('../services/bcrypt.service');
 
 // the DB connection
 const sequelize = require('../../../config/database');
@@ -19,27 +19,27 @@ const MonsterSkillEffectDetail = sequelize.define('monsterSkillEffectDetail', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   aoe: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   single_target: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   self_effect: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
   all: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   // effect: {
   //   type: Sequelize.INTEGER,
@@ -59,51 +59,52 @@ const MonsterSkillEffectDetail = sequelize.define('monsterSkillEffectDetail', {
   // },
   random: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   chance: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
   on_crit: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   on_death: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   note: {
     type: Sequelize.TEXT,
-    allowNull: true
+    allowNull: true,
   },
   self_hp: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   target_hp: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   damage: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
 
 
 MonsterSkillEffectDetail.associate = function (models) {
   MonsterSkillEffectDetail.belongsTo(models.monsterSkill, {
-    as: "skill"
+    as: 'skill',
   });
   MonsterSkillEffectDetail.belongsTo(models.monsterSkillEffect, {
-    as: "effect"
+    as: 'effect',
   });
-}
+};
 
-module.exports = MonsterSkillEffectDetail
+module.exports = MonsterSkillEffectDetail;

@@ -23,7 +23,8 @@ const User = sequelize.define('User', {
 }, {
   hooks,
   tableName,
-  
+
+  freezeTableName: true,
 
 });
 

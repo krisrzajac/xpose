@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // for encrypting our passwords
-//const bcryptSevice = require('../services/bcrypt.service');
+// const bcryptSevice = require('../services/bcrypt.service');
 
 // the DB connection
 const sequelize = require('../../../config/database');
@@ -19,35 +19,36 @@ const MonsterSkillEffect = sequelize.define('monsterSkillEffect', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   is_buff: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   icon_filename: {
     type: Sequelize.STRING,
-    allowNull: true
-  }
+    allowNull: true,
+  },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
 
 MonsterSkillEffect.associate = function (models) {
   MonsterSkillEffect.belongsToMany(models.monsterSkill, {
-    through: "MonsterSkill_SkillEffect"
-  })
-}
+    through: 'MonsterSkill_SkillEffect',
+  });
+};
 
-module.exports = MonsterSkillEffect
+module.exports = MonsterSkillEffect;

@@ -20,7 +20,7 @@ const InstanceMonster = sequelize.define('instanceMonster', {
   },
   pos_id: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: false
   },
   unit_id: {
     type: Sequelize.BIGINT,
@@ -35,68 +35,68 @@ const InstanceMonster = sequelize.define('instanceMonster', {
   //COM2US ID : This is 'name' of monster, links to monster table
   unit_master_id: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //current level
   unit_level: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //Stars(currently)
   //TODO:Constraints (1-6)
   class: {
     type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: true
   },
 
   //con value (hp=con*15)
   con: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //atk
   atk: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //def
   def: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //spd
   spd: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //resist
   resist: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //accuracy
-  unit_master_id: {
+  accuracy: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //critical hit rate
   critical_rate: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //critical damage
   critical_damage: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
   //************************************************************************************************************
@@ -166,7 +166,7 @@ const InstanceMonster = sequelize.define('instanceMonster', {
   //TODO: change to boolean
   homunculus: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
 
 
@@ -193,7 +193,9 @@ const InstanceMonster = sequelize.define('instanceMonster', {
     allowNull: true
   },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
+
 
   
 
@@ -209,6 +211,10 @@ InstanceMonster.associate = function (models) {
   InstanceMonster.belongsTo(models.instanceBattle, {
     // as: "battle_id",
     // as: "instanceBattleId"
+  })
+  InstanceMonster.belongsTo(models.monster, {
+    foreignKey: "unit_master_id",
+    targetKey: "com2us_id",
   })
 }
 

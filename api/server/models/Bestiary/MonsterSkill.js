@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // for encrypting our passwords
-//const bcryptSevice = require('../services/bcrypt.service');
+// const bcryptSevice = require('../services/bcrypt.service');
 
 // the DB connection
 const sequelize = require('../../../config/database');
@@ -19,77 +19,78 @@ const MonsterSkill = sequelize.define('monsterSkill', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   max_level: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   level_progress_description: {
     type: Sequelize.TEXT,
-    allowNull: true
+    allowNull: true,
   },
   icon_filename: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   slot: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   passive: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   cooltime: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
   com2us_id: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
   hits: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   aoe: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   multiplier_formula: {
     type: Sequelize.TEXT,
-    allowNull: true
+    allowNull: true,
   },
   multiplier_formula_raw: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
     allowNull: true,
-    defaultValue: []
-  }
+    defaultValue: [],
+  },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
 
 MonsterSkill.associate = function (models) {
   MonsterSkill.belongsToMany(models.monster, {
-    through: "Monster_Skills"
+    through: 'Monster_Skills',
   });
   MonsterSkill.belongsToMany(models.monsterSkillScalingStat, {
-    through: "MonsterSkill_ScalingStats"
+    through: 'MonsterSkill_ScalingStats',
   });
   MonsterSkill.belongsToMany(models.monsterSkillEffect, {
-    through: "MonsterSkill_SkillEffect"
-  })
-}
-module.exports = MonsterSkill
+    through: 'MonsterSkill_SkillEffect',
+  });
+};
+module.exports = MonsterSkill;

@@ -17,26 +17,27 @@ const MasterBuilding = sequelize.define('masterBuilding', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
 
 
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
 MasterBuilding.associate = function (models) {
-
   MasterBuilding.belongsTo(models.masterWizard, {
     // as: 'wizard_id',
   });
 
   MasterBuilding.belongsTo(models.instanceBuilding, {
+    unique:true,
     //
-  })
+  });
 
   MasterBuilding.belongsTo(models.building);
-}
-module.exports = MasterBuilding
+};
+module.exports = MasterBuilding;

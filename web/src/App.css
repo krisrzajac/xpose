@@ -1,0 +1,61 @@
+h1{
+  font-family: Helvetica;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite .1s linear;
+  /*animation: App-logo-bounce infinite 3s linear;*/
+  height: 80px;
+  width: 80px;
+  border-radius: 80px;
+  
+
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+
+.Battle-list {
+  text-align: left;
+}
+.Battle-headline-title {
+  text-align: left;
+}
+.Battle-headline-player {
+  text-align: left;
+}
+.Battle-headline-iconbar{
+  text-align: left;
+}
+.Battle-headline-icon{
+  padding: 2px;
+  height:40px;
+  width:40px;
+  border-radius: 50%;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes App-logo-bounce{
+  from{transform: translateX(-1200%);}
+  to{ transform:translateX(1200%); }
+}

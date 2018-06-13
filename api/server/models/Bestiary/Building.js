@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // for encrypting our passwords
-//const bcryptSevice = require('../services/bcrypt.service');
+// const bcryptSevice = require('../services/bcrypt.service');
 
 // the DB connection
 const sequelize = require('../../../config/database');
@@ -19,57 +19,58 @@ const Building = sequelize.define('building', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   com2us_id: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    unique: true,
   },
   max_level: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   area: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
   affected_stat: {
     type: Sequelize.INTEGER,
-    allowNull: true
+    allowNull: true,
   },
   element: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   stat_bonus: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
     allowNull: false,
-    defaultValue: []
+    defaultValue: [],
   },
   upgrade_cost: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
     allowNull: false,
-    defaultValue: []
+    defaultValue: [],
   },
   icon_filename: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: true
-  }
+    allowNull: true,
+  },
 }, {
-  tableName
+  freezeTableName: true,
 
-  
+  tableName,
+
 
 });
 
 
-
-module.exports = Building
+module.exports = Building;

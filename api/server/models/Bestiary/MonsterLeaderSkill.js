@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 // for encrypting our passwords
-//const bcryptSevice = require('../services/bcrypt.service');
+// const bcryptSevice = require('../services/bcrypt.service');
 
 // the DB connection
 const sequelize = require('../../../config/database');
@@ -19,28 +19,29 @@ const MonsterLeaderSkill = sequelize.define('monsterLeaderSkill', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   attribute: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   amount: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   element: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   area: {
     type: Sequelize.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
-  tableName
+  freezeTableName: true,
+  tableName,
 
-  
+
 
 });
-module.exports = MonsterLeaderSkill
+module.exports = MonsterLeaderSkill;

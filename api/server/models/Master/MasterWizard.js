@@ -17,14 +17,16 @@ const MasterWizard = sequelize.define('masterWizard', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
 
 }, {
-  tableName
+
+  freezeTableName: true,
+  tableName,
+  
 });
 MasterWizard.associate = function (models) {
-
   MasterWizard.hasMany(models.masterMonster, {
     // as: 'wizard_id',
   });
@@ -37,7 +39,8 @@ MasterWizard.associate = function (models) {
   });
 
   MasterWizard.belongsTo(models.instanceWizard, {
+    unique:true,
     //
-  })
-}
-module.exports = MasterWizard
+  });
+};
+module.exports = MasterWizard;

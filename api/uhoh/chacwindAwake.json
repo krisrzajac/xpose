@@ -1,0 +1,156 @@
+{
+    "url": "https://swarfarm.com/api/bestiary/1176",
+    "pk": 1176,
+    "com2us_id": 21913,
+    "name": "Melissa",
+    "image_filename": "unit_icon_0045_2_1.png",
+    "element": "Wind",
+    "archetype": "Attack",
+    "base_stars": 5,
+    "obtainable": true,
+    "can_awaken": true,
+    "is_awakened": true,
+    "awaken_bonus": "Leader Skill",
+    "skills": [
+        {
+            "pk": 1945,
+            "com2us_id": 12603,
+            "name": "Crescent Moon Slash",
+            "description": "Attacks the enemy 2 times and deals more damage when the enemy's HP is low. Additionally, if there's Boomerang Warrior included in the ally team, one of Chakram Dancers will attack together with Boomerang Warrior during Boomerang Warrior's turn.",
+            "slot": 1,
+            "cooltime": null,
+            "hits": 2,
+            "passive": false,
+            "max_level": 6,
+            "level_progress_description": "Damage +5%\r\nDamage +5%\r\nDamage +5%\r\nDamage +10%\r\nDamage +15%",
+            "skill_effect": [
+                {
+                    "name": "Ally Attack",
+                    "is_buff": true,
+                    "description": "Brings one or more allies to attack at the same time. ",
+                    "icon_filename": ""
+                }
+            ],
+            "multiplier_formula": "{ATK}*(-1.5*{Target Current HP %} + 3.0)",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 1.0], [\"*\"], [\"TARGET_CUR_HP_RATE\", \"*\", -1.5, \"+\", 3.0]]",
+            "icon_filename": "skill_icon_0016_5_3.png"
+        },
+        {
+            "pk": 1950,
+            "com2us_id": 12608,
+            "name": "Double Strike",
+            "description": "Attacks the enemy 2 times to decrease the Defense with the first attack and decreases the Attack Power afterwards with a 50% chance each.",
+            "slot": 2,
+            "cooltime": 3,
+            "hits": 2,
+            "passive": false,
+            "max_level": 4,
+            "level_progress_description": "Effect Rate +10%\nDamage +15%\nCooltime Turn -1\n",
+            "skill_effect": [
+                {
+                    "name": "Decrease ATK",
+                    "is_buff": false,
+                    "description": "Attack Power is reduced by 50%",
+                    "icon_filename": "debuff_attack_down.png"
+                },
+                {
+                    "name": "Decrease DEF",
+                    "is_buff": false,
+                    "description": "Defense is reduced by 70%",
+                    "icon_filename": "debuff_defence_down.png"
+                }
+            ],
+            "multiplier_formula": "2.7*{ATK}",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 2.7]]",
+            "icon_filename": "skill_icon_0016_0_4.png"
+        },
+        {
+            "pk": 1955,
+            "com2us_id": 12613,
+            "name": "Massacre Dance",
+            "description": "Attacks the enemy 2 times to inflict damage that ignores all damage reduction effects and increases the damage by 10% each according to the number of beneficial and harmful effects granted on the target. Boomerang Warrior's attacks will also ignore all of the target's beneficial effects when they attack together.",
+            "slot": 3,
+            "cooltime": 5,
+            "hits": 2,
+            "passive": false,
+            "max_level": 4,
+            "level_progress_description": "Damage +10%\nDamage +10%\nCooltime Turn -1\n",
+            "skill_effect": [
+                {
+                    "name": "Ignore Damage Reduction",
+                    "is_buff": false,
+                    "description": "Ignores damage reduction effects",
+                    "icon_filename": ""
+                }
+            ],
+            "multiplier_formula": "3.7*{ATK}",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 3.7]]",
+            "icon_filename": "skill_icon_0016_5_4.png"
+        }
+    ],
+    "leader_skill": {
+        "attribute": "HP",
+        "amount": 33,
+        "area": "Arena",
+        "element": null
+    },
+    "homunculus_skills": [],
+    "base_hp": 6660,
+    "base_attack": 565,
+    "base_defense": 444,
+    "speed": 103,
+    "crit_rate": 15,
+    "crit_damage": 50,
+    "resistance": 15,
+    "accuracy": 0,
+    "max_lvl_hp": 9060,
+    "max_lvl_attack": 769,
+    "max_lvl_defense": 604,
+    "awakens_from": {
+        "url": "https://swarfarm.com/api/bestiary/1171",
+        "pk": 1171,
+        "name": "Chakram Dancer",
+        "element": "Wind"
+    },
+    "awakens_to": null,
+    "awaken_mats_fire_low": 0,
+    "awaken_mats_fire_mid": 0,
+    "awaken_mats_fire_high": 0,
+    "awaken_mats_water_low": 0,
+    "awaken_mats_water_mid": 0,
+    "awaken_mats_water_high": 0,
+    "awaken_mats_wind_low": 0,
+    "awaken_mats_wind_mid": 0,
+    "awaken_mats_wind_high": 0,
+    "awaken_mats_light_low": 0,
+    "awaken_mats_light_mid": 0,
+    "awaken_mats_light_high": 0,
+    "awaken_mats_dark_low": 0,
+    "awaken_mats_dark_mid": 0,
+    "awaken_mats_dark_high": 0,
+    "awaken_mats_magic_low": 0,
+    "awaken_mats_magic_mid": 0,
+    "awaken_mats_magic_high": 0,
+    "source": [
+        {
+            "id": 3,
+            "name": "Legendary Scroll",
+            "description": "",
+            "farmable_source": false
+        },
+        {
+            "id": 7,
+            "name": "Wind Scroll",
+            "description": "",
+            "farmable_source": false
+        },
+        {
+            "id": 38,
+            "name": "Mystical Scroll or Crystal Summon",
+            "description": "",
+            "farmable_source": false
+        }
+    ],
+    "fusion_food": false,
+    "homunculus": false
+}

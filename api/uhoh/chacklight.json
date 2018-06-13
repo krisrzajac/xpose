@@ -1,0 +1,139 @@
+{
+    "url": "https://swarfarm.com/api/bestiary/1172",
+    "pk": 1172,
+    "com2us_id": 21904,
+    "name": "Chakram Dancer",
+    "image_filename": "unit_icon_0045_3_0.png",
+    "element": "Light",
+    "archetype": "Attack",
+    "base_stars": 4,
+    "obtainable": true,
+    "can_awaken": true,
+    "is_awakened": false,
+    "awaken_bonus": "Leader Skill",
+    "skills": [
+        {
+            "pk": 1946,
+            "com2us_id": 12604,
+            "name": "Crescent Moon Slash",
+            "description": "Attacks the enemy 2 times and deals more damage when the enemy's HP is low. Additionally, if there's Boomerang Warrior included in the ally team, one of Chakram Dancers will attack together with Boomerang Warrior during Boomerang Warrior's turn.",
+            "slot": 1,
+            "cooltime": null,
+            "hits": 2,
+            "passive": false,
+            "max_level": 6,
+            "level_progress_description": "Damage +5%\r\nDamage +5%\r\nDamage +5%\r\nDamage +10%\r\nDamage +15%",
+            "skill_effect": [
+                {
+                    "name": "Ally Attack",
+                    "is_buff": true,
+                    "description": "Brings one or more allies to attack at the same time. ",
+                    "icon_filename": ""
+                }
+            ],
+            "multiplier_formula": "{ATK}*(-1.5*{Target Current HP %} + 3.0)",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 1.0], [\"*\"], [\"TARGET_CUR_HP_RATE\", \"*\", -1.5, \"+\", 3.0]]",
+            "icon_filename": "skill_icon_0016_6_3.png"
+        },
+        {
+            "pk": 1951,
+            "com2us_id": 12609,
+            "name": "Chakram Crush",
+            "description": "Attacks all enemies with chakrams 2 times and stuns them for 1 turn with a 30% chance each.",
+            "slot": 2,
+            "cooltime": 4,
+            "hits": 2,
+            "passive": false,
+            "max_level": 6,
+            "level_progress_description": "Effect Rate +5%\nDamage +10%\nEffect Rate +5%\nDamage +10%\nCooltime Turn -1\n",
+            "skill_effect": [
+                {
+                    "name": "AOE",
+                    "is_buff": true,
+                    "description": "Applies skill to more than one target",
+                    "icon_filename": ""
+                },
+                {
+                    "name": "Stun",
+                    "is_buff": false,
+                    "description": "Enemy is stunned and immobilized for a number of turns",
+                    "icon_filename": "debuff_stun.png"
+                }
+            ],
+            "multiplier_formula": "1.7*{ATK}",
+            "multiplier_formula_raw": "[[\"ATK\", \"*\", 1.7]]",
+            "icon_filename": "skill_icon_0016_1_4.png"
+        },
+        {
+            "pk": 1956,
+            "com2us_id": 12614,
+            "name": "Golden Opportunity (Passive)",
+            "description": "Inflicts damage that ignores the enemy target's Defense with a 25% chance when attacking the enemy under inability effects. Boomerang Warrior's attacks will also grant the same effect when they attack together. [Automatic Effect]",
+            "slot": 3,
+            "cooltime": null,
+            "hits": 1,
+            "passive": true,
+            "max_level": 1,
+            "level_progress_description": "",
+            "skill_effect": [
+                {
+                    "name": "Ignore DEF",
+                    "is_buff": true,
+                    "description": "Attack will ignore the target's defense.",
+                    "icon_filename": ""
+                }
+            ],
+            "multiplier_formula": "",
+            "multiplier_formula_raw": "[]",
+            "icon_filename": "skill_icon_0016_6_4.png"
+        }
+    ],
+    "leader_skill": null,
+    "homunculus_skills": [],
+    "base_hp": 4725,
+    "base_attack": 351,
+    "base_defense": 315,
+    "speed": 102,
+    "crit_rate": 15,
+    "crit_damage": 50,
+    "resistance": 15,
+    "accuracy": 0,
+    "max_lvl_hp": 8730,
+    "max_lvl_attack": 648,
+    "max_lvl_defense": 582,
+    "awakens_from": null,
+    "awakens_to": {
+        "url": "https://swarfarm.com/api/bestiary/1177",
+        "pk": 1177,
+        "name": "Deva",
+        "element": "Light"
+    },
+    "awaken_mats_fire_low": 0,
+    "awaken_mats_fire_mid": 0,
+    "awaken_mats_fire_high": 0,
+    "awaken_mats_water_low": 0,
+    "awaken_mats_water_mid": 0,
+    "awaken_mats_water_high": 0,
+    "awaken_mats_wind_low": 0,
+    "awaken_mats_wind_mid": 0,
+    "awaken_mats_wind_high": 0,
+    "awaken_mats_light_low": 0,
+    "awaken_mats_light_mid": 20,
+    "awaken_mats_light_high": 10,
+    "awaken_mats_dark_low": 0,
+    "awaken_mats_dark_mid": 0,
+    "awaken_mats_dark_high": 0,
+    "awaken_mats_magic_low": 0,
+    "awaken_mats_magic_mid": 15,
+    "awaken_mats_magic_high": 5,
+    "source": [
+        {
+            "id": 4,
+            "name": "Scroll of Light and Darkness",
+            "description": "",
+            "farmable_source": false
+        }
+    ],
+    "fusion_food": false,
+    "homunculus": false
+}
