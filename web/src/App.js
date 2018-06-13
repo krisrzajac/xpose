@@ -3,10 +3,7 @@ import logo from "./devilmon_dark.png";
 import { Spring, Transition, animated } from "react-spring";
 import "./App.css";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { updateUser, apiRequest } from "./actions/userActions";
-import { createSelector } from "reselect";
+
 const defaultStyles = {
   overflow: "hidden",
   width: "100%",
@@ -24,10 +21,6 @@ class App extends Component {
       response: []
     };
     this.onUpdateUser = this.onUpdateUser.bind(this);
-  }
-
-  onUpdateUser(event) {
-    this.props.onUpdateUser(event.target.value);
   }
 
   onMouseClick() {
