@@ -116,11 +116,28 @@ const instanceBattleController = () => {
     try {
       const model = await instanceBattle.findOne({
         where: {
-          battle_key
+          battle_key: battle_key
         },
         include: [
           {
-            all: true
+            association: "instanceWizards",
+            include: [
+              {
+                association: "instanceMonsters",
+                include: [
+                  {
+                    association: "instanceRunes"
+                  },
+                  {
+                    association: "monster",
+                    attributes: ["name", "image_filename"]
+                  }
+                ]
+              },
+              {
+                association: "instanceBuildings"
+              }
+            ]
           }
         ]
       });

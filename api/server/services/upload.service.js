@@ -1,19 +1,27 @@
-const database = require('../../config/database');
-
-
+const database = require("../../config/database");
+const mapping = require("../mapping");
+const modelService = require("./model.service");
 const uploadService = () => {
-  const sortDecoListTowers = (deco_list) => {
-    cmp = function (x, y) {
+  //* *****************************************************************************************************************************************
+  //* *****************************************************************************************************************************************
+  // Sorting functions
+  //* *****************************************************************************************************************************************
+  //* *****************************************************************************************************************************************
+
+  const sortDecoListTowers = deco_list => {
+    cmp = function(x, y) {
       return x > y ? 1 : x < y ? -1 : 0;
     };
 
-    deco_list = deco_list.sort((a, b) => cmp([cmp(a.master_id, b.master_id)], [cmp(b.master_id, a.master_id)]));
+    deco_list = deco_list.sort((a, b) =>
+      cmp([cmp(a.master_id, b.master_id)], [cmp(b.master_id, a.master_id)])
+    );
 
     return deco_list;
   };
 
   // Converts deco list into object with objects, with key's as master_id
-  const prettyDecoList = (deco_list) => {
+  const prettyDecoList = deco_list => {
     decoObject = deco_list.reduce((objectParent, object) => {
       objectParent[object.master_id] = object;
       return objectParent;
@@ -22,37 +30,38 @@ const uploadService = () => {
     return deco_list;
   };
 
-  const sortUnitEquippedRunes = (unit) => {
+  const sortUnitEquippedRunes = unit => {
     if (unit.runes) {
       // generic sort function
-      cmp = function (x, y) {
+      cmp = function(x, y) {
         return x > y ? 1 : x < y ? -1 : 0;
       };
-
 
       // make sure that runes is actually an array (thanks com2us)
       if (unit.runes === Object(unit.runes)) {
         unit.runes = Object.values(unit.runes);
       }
 
-      unit.runes = unit.runes.sort((a, b) => cmp([cmp(a.slot_no, b.slot_no)], [cmp(b.slot_no, a.slot_no)]));
+      unit.runes = unit.runes.sort((a, b) =>
+        cmp([cmp(a.slot_no, b.slot_no)], [cmp(b.slot_no, a.slot_no)])
+      );
     } else {
       unit.runes = [];
     }
     return unit;
   };
 
-
-  const sortUnits = (unit_list) => {
-    cmp = function (x, y) {
+  const sortUnits = unit_list => {
+    cmp = function(x, y) {
       return x > y ? 1 : x < y ? -1 : 0;
     };
 
-    unit_list = unit_list.sort((a, b) => cmp([cmp(a.pos_id, b.pos_id)], [cmp(b.pos_id, a.pos_id)]));
+    unit_list = unit_list.sort((a, b) =>
+      cmp([cmp(a.pos_id, b.pos_id)], [cmp(b.pos_id, a.pos_id)])
+    );
 
     return unit_list;
   };
-
 
   //* *****************************************************************************************************************************************
   //* *****************************************************************************************************************************************
@@ -60,16 +69,13 @@ const uploadService = () => {
   //* *****************************************************************************************************************************************
   //* *****************************************************************************************************************************************
 
-
   //* *****************************************************************************************************************************************
   //* *****************************************************************************************************************************************
   // HubUserLogin
   //* *****************************************************************************************************************************************
   //* *****************************************************************************************************************************************
 
-
-  const formatDataHubUserLogin = (data) => {
-
+  const formatDataHubUserLogin = data => {
     const wizardPlayer = {};
 
     // Arrays for sequelize bulkCreate() method -
@@ -89,19 +95,14 @@ const uploadService = () => {
 
     returnObject.monsterPlayer = monsterPlayer;
 
-    returnObject.runesPlayer = runesPlayer;
-
     // Populate instanceBattle object
     returnObject.command = data.command;
     returnObject.ts_val = data.ts_val;
     returnObject.tvalue = data.tvalue;
 
-
     // populate first wizard object (player in arena)
     wizardPlayer.wizard_id = data.wizard_info.wizard_id;
     wizardPlayer.wizard_name = data.wizard_info.wizard_name;
-
-
 
     // Populate user monster array
     i = 0;
@@ -115,7 +116,6 @@ const uploadService = () => {
       monsterPlayer[i].unit_level = monster.unit_level;
       monsterPlayer[i].class = monster.class;
 
-
       monsterPlayer[i].con = monster.con;
       monsterPlayer[i].atk = monster.atk;
       monsterPlayer[i].def = monster.def;
@@ -124,7 +124,6 @@ const uploadService = () => {
       monsterPlayer[i].accuracy = monster.accuracy;
       monsterPlayer[i].critical_rate = monster.critical_rate;
       monsterPlayer[i].critical_damage = monster.critical_damage;
-
 
       for (const skill in monster.skills) {
         const arrLength = monster.skills.length;
@@ -135,7 +134,13 @@ const uploadService = () => {
 
       monsterPlayer[i].homunculus = monster.homunculus;
 
-      for (const rune of monster.runes) {
+      //total subs from runes for this monster
+      let runeTotalSubs = new Array(13).fill(0);
+      let substats_towers = new Array(13);
+      let substats_total = new Array(13);
+      let set_count = new Array(23);
+
+      for (let rune of monster.runes) {
         // main stat
         rune.pri_eff_0 = rune.pri_eff[0];
         rune.pri_eff_1 = rune.pri_eff[1];
@@ -144,8 +149,13 @@ const uploadService = () => {
         rune.prefix_eff_0 = rune.prefix_eff[0];
         rune.prefix_eff_1 = rune.prefix_eff[1];
 
-        const hasStats = new Array(12).fill(0);
+        const hasStats = new Array(13).fill(0);
 
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            rune[`sec_eff_${i}_${j}`] = 0;
+          }
+        }
 
         if (rune.sec_eff) {
           for (let i = 0; i < rune.sec_eff.length; i++) {
@@ -183,10 +193,9 @@ const uploadService = () => {
       }
     }
 
-
     // TODO: RETURN TYPE
     return returnObject;
-  }
+  };
 
   //* *****************************************************************************************************************************************
   //* *****************************************************************************************************************************************
@@ -194,15 +203,13 @@ const uploadService = () => {
   //* *****************************************************************************************************************************************
   //* *****************************************************************************************************************************************
 
-
-  const sortArenaRunes = (data) => {
+  const sortArenaRunes = data => {
     for (const monster of data.opp_unit_list) {
       sortUnitEquippedRunes(monster.unit_info);
     }
   };
 
-
-  const sortArenaTowers = (data) => {
+  const sortArenaTowers = data => {
     for (const user of data.battle_info.users) {
       this.sortDecoListTowers(user.deco_list);
       user.deco_list = this.prettyDecoList(user.deco_list);
@@ -210,17 +217,14 @@ const uploadService = () => {
     return data;
   };
 
-
   const prepDataArena = (data, mymons = [], mybuild = []) => {
     data = this.formatDataArena(data, mymons, mybuild);
 
     this.sortArenaRunes(data);
     this.sortArenaTowers(data);
 
-
     return data;
   };
-
 
   // Flattens data to be sent to model function
   // TODO: Once we find a better way to 'create' Sequelize models / DB rows
@@ -228,7 +232,7 @@ const uploadService = () => {
   // this makes data usable with sequelize.models['modelName'].create\({key:value pairs that are columns in model})
   // A thought - we can put this method into model ?
 
-  const formatDataArena = (data) => {
+  const formatDataArena = data => {
     sortArenaRunes(data);
 
     const battle = {};
@@ -248,7 +252,6 @@ const uploadService = () => {
     const runesPlayer = [];
     const runesOpponent = [];
 
-
     const returnObject = {};
     returnObject.battle = battle;
 
@@ -261,20 +264,15 @@ const uploadService = () => {
     returnObject.monsterPlayer = monsterPlayer;
     returnObject.monsterOpponent = monsterOpponent;
 
-    returnObject.runesPlayer = runesPlayer;
-    returnObject.runesOpponent = runesOpponent;
-
     // Populate instanceBattle object
     battle.command = data.command;
     battle.battle_key = data.battle_key;
     battle.ts_val = data.ts_val;
     battle.tvalue = data.tvalue;
 
-
     // populate first wizard object (player in arena)
     wizardPlayer.wizard_id = data.wizard_info.wizard_id;
     wizardPlayer.wizard_name = data.wizard_info.wizard_name;
-
 
     // arena my 'unit_id_list' only has id's - need to cross reference from existing data in DB?
     // TODO: search for existing entries in DB - need to use db.find() with similar timestamp?
@@ -296,24 +294,21 @@ const uploadService = () => {
     // TODO: Get buildings for player from DB
     // newData.battle_info.users[0].deco_list = mybuild;
 
-
     // user[1] is your opponent in arena
-
 
     if (data.opp_pvp_info) {
       wizardOpponent.wizard_id = data.opp_pvp_info.wizard_id;
       // TODO: Check for wizard name in DB, wizardName for opponent is not transmitted for battle
       //
-      wizardOpponent.wizard_name = 'Name not in DB :(';
+      wizardOpponent.wizard_name = "Name not in DB :(";
     } else {
       // Rival battles have no 'opp_pvp_info' in json object -
       // rival battles have no wizard id - using this temporarily
       // TODO : Better solution, also DONT TRANSMIT RIVAL BATTLES TO MY SERVER -
       // we will filter these eventually but for the sake of completeness adding functionality
-      wizardOpponent.wizard_id = '000000000000';
-      wizardOpponent.wizard_name = 'Rival Battle Opponent';
+      wizardOpponent.wizard_id = "000000000000";
+      wizardOpponent.wizard_name = "Rival Battle Opponent";
     }
-
 
     // Populate opponent monsters array
     i = 0;
@@ -327,7 +322,6 @@ const uploadService = () => {
       monsterOpponent[i].unit_level = monster.unit_info.unit_level;
       monsterOpponent[i].class = monster.unit_info.class;
 
-
       monsterOpponent[i].con = monster.unit_info.con;
       monsterOpponent[i].atk = monster.unit_info.atk;
       monsterOpponent[i].def = monster.unit_info.def;
@@ -336,7 +330,6 @@ const uploadService = () => {
       monsterOpponent[i].accuracy = monster.unit_info.accuracy;
       monsterOpponent[i].critical_rate = monster.unit_info.critical_rate;
       monsterOpponent[i].critical_damage = monster.unit_info.critical_damage;
-
 
       for (const skill in monster.unit_info.skills) {
         const arrLength = monster.unit_info.skills.length;
@@ -347,7 +340,7 @@ const uploadService = () => {
 
       monsterOpponent[i].homunculus = monster.unit_info.homunculus;
 
-      for (const rune of monster.unit_info.runes) {
+      for (let rune of monster.unit_info.runes) {
         // main stat
         rune.pri_eff_0 = rune.pri_eff[0];
         rune.pri_eff_1 = rune.pri_eff[1];
@@ -357,7 +350,6 @@ const uploadService = () => {
         rune.prefix_eff_1 = rune.prefix_eff[1];
 
         const hasStats = new Array(12).fill(0);
-
 
         if (rune.sec_eff) {
           for (let i = 0; i < rune.sec_eff.length; i++) {
@@ -386,7 +378,6 @@ const uploadService = () => {
     // TODO: Pull from master list or transmit them through plugin?
     // Would check master rune list against the unit id's we have in data
 
-
     // Opponent buildings
     //
     i = 0;
@@ -400,15 +391,17 @@ const uploadService = () => {
       }
     }
 
-
     // TODO: RETURN TYPE
     return returnObject;
   };
 
+  //* *****************************************************************************************************************************************
+  //* *****************************************************************************************************************************************
+  // BattleGuildSiegeStart
+  //* *****************************************************************************************************************************************
+  //* *****************************************************************************************************************************************
 
-
-
-  const sortSiegeRunes = (data) => {
+  const sortSiegeRunes = data => {
     for (const user of data.battle_info.users) {
       for (const monster of user.units) {
         gVisualHelper.sortUnitEquippedRunes(monster.unit);
@@ -418,15 +411,13 @@ const uploadService = () => {
     return data;
   };
 
-
-  const sortSiegeTowers = (data) => {
+  const sortSiegeTowers = data => {
     for (const user of data.battle_info.users) {
       gVisualHelper.sortDecoListTowers(user.deco_list);
       user.deco_list = gVisualHelper.prettyDecoList(user.deco_list);
     }
     return data;
   };
-
 
   const prepDataSiege = (data, mymons = [], mybuild = []) => {
     data = this.formatDataSiege(data, mymons, mybuild);
@@ -436,12 +427,15 @@ const uploadService = () => {
 
     for (const user of data.battle_info.users) {
       gVisualHelper.extendUnitsData(user.units, user.deco_list);
-      gVisualHelper.extendUnitsWithLeaderData(user.units, user.leader_unit.unit_master_id, data.command);
+      gVisualHelper.extendUnitsWithLeaderData(
+        user.units,
+        user.leader_unit.unit_master_id,
+        data.command
+      );
     }
 
     return data;
   };
-
 
   const formatDataSiege = (data, mymons = [], mybuild = []) => {
     const newData = {};
@@ -451,15 +445,16 @@ const uploadService = () => {
 
     newData.battle_info = {};
     newData.battle_info.first_wizard_id = data.wizard_info.wizard_id;
-    newData.battle_info.boss_wizard_id = data.guildsiege_opp_unit_list[0].unit_info.wizard_id;
+    newData.battle_info.boss_wizard_id =
+      data.guildsiege_opp_unit_list[0].unit_info.wizard_id;
     newData.battle_info.users = [];
 
     newData.battle_info.users[0] = {};
-    newData.battle_info.users[0].wizard_id = newData.battle_info.first_wizard_id;
+    newData.battle_info.users[0].wizard_id =
+      newData.battle_info.first_wizard_id;
     newData.battle_info.users[0].wizard_name = data.wizard_info.wizard_name;
 
     newData.battle_info.users[0].units = [];
-
 
     // guildsiege_my_unit_list data sucks - formatted differently then guildsiege_opp_unit_list
     // array of monster.unit objects without a containing object w/ pos_id. adding these to users data
@@ -474,10 +469,14 @@ const uploadService = () => {
     // Leader unit
     newData.battle_info.users[0].leader_unit = {};
     newData.battle_info.users[0].leader_unit.pick_slot_id = 1;
-    newData.battle_info.users[0].leader_unit.unit_id = newData.battle_info.users[0].units[0].unit.unit_id;
-    newData.battle_info.users[0].leader_unit.unit_master_id = newData.battle_info.users[0].units[0].unit.unit_master_id;
-    newData.battle_info.users[0].leader_unit.class = newData.battle_info.users[0].units[0].unit.class;
-    newData.battle_info.users[0].leader_unit.unit_level = newData.battle_info.users[0].units[0].unit.unit_level;
+    newData.battle_info.users[0].leader_unit.unit_id =
+      newData.battle_info.users[0].units[0].unit.unit_id;
+    newData.battle_info.users[0].leader_unit.unit_master_id =
+      newData.battle_info.users[0].units[0].unit.unit_master_id;
+    newData.battle_info.users[0].leader_unit.class =
+      newData.battle_info.users[0].units[0].unit.class;
+    newData.battle_info.users[0].leader_unit.unit_level =
+      newData.battle_info.users[0].units[0].unit.unit_level;
 
     // deco list
     // deco for the player not included in siege battle data - adding empty array
@@ -485,13 +484,12 @@ const uploadService = () => {
 
     newData.battle_info.users[0].deco_list = mybuild;
 
-
     // user[1] is your opponent in siege battle
 
     newData.battle_info.users[1] = {};
     newData.battle_info.users[1].wizard_id = newData.battle_info.boss_wizard_id;
     // add lookup from wizard-id-logger
-    newData.battle_info.users[1].wizard_name = 'unknown';
+    newData.battle_info.users[1].wizard_name = "unknown";
     newData.battle_info.users[1].units = [];
     i = 0;
     for (const monster of data.guildsiege_opp_unit_list) {
@@ -501,25 +499,32 @@ const uploadService = () => {
       i++;
     }
 
-
     // Leader unit
     newData.battle_info.users[1].leader_unit = {};
     newData.battle_info.users[1].leader_unit.pick_slot_id = 1;
-    newData.battle_info.users[1].leader_unit.unit_id = newData.battle_info.users[1].units[0].unit.unit_id;
-    newData.battle_info.users[1].leader_unit.unit_master_id = newData.battle_info.users[1].units[0].unit.unit_master_id;
-    newData.battle_info.users[1].leader_unit.class = newData.battle_info.users[1].units[0].unit.class;
-    newData.battle_info.users[1].leader_unit.unit_level = newData.battle_info.users[1].units[0].unit.unit_level;
+    newData.battle_info.users[1].leader_unit.unit_id =
+      newData.battle_info.users[1].units[0].unit.unit_id;
+    newData.battle_info.users[1].leader_unit.unit_master_id =
+      newData.battle_info.users[1].units[0].unit.unit_master_id;
+    newData.battle_info.users[1].leader_unit.class =
+      newData.battle_info.users[1].units[0].unit.class;
+    newData.battle_info.users[1].leader_unit.unit_level =
+      newData.battle_info.users[1].units[0].unit.unit_level;
 
     // deco list
 
     newData.battle_info.users[1].deco_list = data.guildsiege_opp_deco_list;
 
-
     return newData;
   };
 
+  //* *****************************************************************************************************************************************
+  //* *****************************************************************************************************************************************
+  // BattleGuildWarStart
+  //* *****************************************************************************************************************************************
+  //* *****************************************************************************************************************************************
 
-  const sortGuildWarRunes = (data) => {
+  const sortGuildWarRunes = data => {
     for (const user of data.battle_info.users) {
       for (const monster of user.units) {
         gVisualHelper.sortUnitEquippedRunes(monster.unit);
@@ -529,15 +534,13 @@ const uploadService = () => {
     return data;
   };
 
-
-  const sortGuildWarTowers = (data) => {
+  const sortGuildWarTowers = data => {
     for (const user of data.battle_info.users) {
       gVisualHelper.sortDecoListTowers(user.deco_list);
       user.deco_list = gVisualHelper.prettyDecoList(user.deco_list);
     }
     return data;
   };
-
 
   const prepDataGuildWar = (data, mymons = [], mybuild = []) => {
     data = this.formatDataGuildWar(data, mymons, mybuild);
@@ -548,13 +551,16 @@ const uploadService = () => {
     for (const battle of data) {
       for (const user of battle.battle_info.users) {
         gVisualHelper.extendUnitsData(user.units, user.deco_list);
-        gVisualHelper.extendUnitsWithLeaderData(user.units, user.leader_unit.unit_master_id, battle.command);
+        gVisualHelper.extendUnitsWithLeaderData(
+          user.units,
+          user.leader_unit.unit_master_id,
+          battle.command
+        );
       }
     }
 
     return data;
   };
-
 
   const formatDataGuildWar = (data, mymons = [], mybuild = []) => {
     const newData = [];
@@ -566,15 +572,17 @@ const uploadService = () => {
 
       newData[j].battle_info = {};
       newData[j].battle_info.first_wizard_id = data.wizard_info.wizard_id;
-      newData[j].battle_info.boss_wizard_id = data.guildwar_opp_unit_list[j][0].unit_info.wizard_id;
+      newData[j].battle_info.boss_wizard_id =
+        data.guildwar_opp_unit_list[j][0].unit_info.wizard_id;
       newData[j].battle_info.users = [];
 
       newData[j].battle_info.users[0] = {};
-      newData[j].battle_info.users[0].wizard_id = newData[j].battle_info.first_wizard_id;
-      newData[j].battle_info.users[0].wizard_name = data.wizard_info.wizard_name;
+      newData[j].battle_info.users[0].wizard_id =
+        newData[j].battle_info.first_wizard_id;
+      newData[j].battle_info.users[0].wizard_name =
+        data.wizard_info.wizard_name;
 
       newData[j].battle_info.users[0].units = [];
-
 
       // guildwar_my_unit_list data sucks - formatted differently then guildwar_opp_unit_list[j]
       // array of monster.unit objects without a containing object w/ pos_id. adding these to users data
@@ -589,23 +597,27 @@ const uploadService = () => {
       // Leader unit
       newData[j].battle_info.users[0].leader_unit = {};
       newData[j].battle_info.users[0].leader_unit.pick_slot_id = 1;
-      newData[j].battle_info.users[0].leader_unit.unit_id = newData[j].battle_info.users[0].units[0].unit.unit_id;
-      newData[j].battle_info.users[0].leader_unit.unit_master_id = newData[j].battle_info.users[0].units[0].unit.unit_master_id;
-      newData[j].battle_info.users[0].leader_unit.class = newData[j].battle_info.users[0].units[0].unit.class;
-      newData[j].battle_info.users[0].leader_unit.unit_level = newData[j].battle_info.users[0].units[0].unit.unit_level;
+      newData[j].battle_info.users[0].leader_unit.unit_id =
+        newData[j].battle_info.users[0].units[0].unit.unit_id;
+      newData[j].battle_info.users[0].leader_unit.unit_master_id =
+        newData[j].battle_info.users[0].units[0].unit.unit_master_id;
+      newData[j].battle_info.users[0].leader_unit.class =
+        newData[j].battle_info.users[0].units[0].unit.class;
+      newData[j].battle_info.users[0].leader_unit.unit_level =
+        newData[j].battle_info.users[0].units[0].unit.unit_level;
 
       // deco list
       // deco for the player not included in siege battle data - adding empty array or data from cached HubUserLogin
 
       newData[j].battle_info.users[0].deco_list = mybuild;
 
-
       // user[1] is your opponent in siege battle
 
       newData[j].battle_info.users[1] = {};
-      newData[j].battle_info.users[1].wizard_id = newData[j].battle_info.boss_wizard_id;
+      newData[j].battle_info.users[1].wizard_id =
+        newData[j].battle_info.boss_wizard_id;
       // add lookup from wizard-id-logger
-      newData[j].battle_info.users[1].wizard_name = 'unknown';
+      newData[j].battle_info.users[1].wizard_name = "unknown";
       newData[j].battle_info.users[1].units = [];
       i = 0;
       for (const monster of data.guildwar_opp_unit_list[j]) {
@@ -615,14 +627,17 @@ const uploadService = () => {
         i++;
       }
 
-
       // Leader unit
       newData[j].battle_info.users[1].leader_unit = {};
       newData[j].battle_info.users[1].leader_unit.pick_slot_id = 1;
-      newData[j].battle_info.users[1].leader_unit.unit_id = newData[j].battle_info.users[1].units[0].unit.unit_id;
-      newData[j].battle_info.users[1].leader_unit.unit_master_id = newData[j].battle_info.users[1].units[0].unit.unit_master_id;
-      newData[j].battle_info.users[1].leader_unit.class = newData[j].battle_info.users[1].units[0].unit.class;
-      newData[j].battle_info.users[1].leader_unit.unit_level = newData[j].battle_info.users[1].units[0].unit.unit_level;
+      newData[j].battle_info.users[1].leader_unit.unit_id =
+        newData[j].battle_info.users[1].units[0].unit.unit_id;
+      newData[j].battle_info.users[1].leader_unit.unit_master_id =
+        newData[j].battle_info.users[1].units[0].unit.unit_master_id;
+      newData[j].battle_info.users[1].leader_unit.class =
+        newData[j].battle_info.users[1].units[0].unit.class;
+      newData[j].battle_info.users[1].leader_unit.unit_level =
+        newData[j].battle_info.users[1].units[0].unit.unit_level;
 
       // deco list
 
@@ -631,11 +646,10 @@ const uploadService = () => {
     return newData;
   };
 
-
   return {
     // upload methods
     formatDataArena,
-    formatDataHubUserLogin,
+    formatDataHubUserLogin
   };
 };
 

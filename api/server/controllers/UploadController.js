@@ -1,16 +1,12 @@
 const database = require("../../config/database");
 const uploadService = require("../services/upload.service");
-
+const modelService = require("../services/model.service");
 const uploadController = () => {
   const create = async (req, res) => {
     // body is part of a form-data
     const { value } = req.body;
 
     try {
-      // console.log("**********************")
-      // console.log("req.body");
-      // console.log("**********************")
-      // console.log(req.body);
       if (!req.body.command) {
         return res.status(400).json({
           msg: "Bad Request: Not a battle"
@@ -18,12 +14,16 @@ const uploadController = () => {
       }
       switch (req.body.command) {
         case "HubUserLogin": {
-          req.body = uploadService().formatDataHubUserLogin(req.body);
+          req.body = await uploadService().formatDataHubUserLogin(req.body);
 
           let wizardPlayer = await database.models["instanceWizard"].create(
             req.body.wizardPlayer
           );
-
+          req.body.monsterPlayer = await modelService().extendUnitsData(
+            req.body.monsterPlayer,
+            req.body.buildingsPlayer,
+            req.body.command
+          );
           for (let monster of req.body.monsterPlayer) {
             monster.instanceWizardId = wizardPlayer.id;
             if (monster.unit_master_id <= 21900) {
@@ -69,14 +69,12 @@ const uploadController = () => {
           let wizardOpponent = await database.models["instanceWizard"].create(
             req.body.wizardOpponent
           );
-
+          let newMonsterPlayer = [];
           for (let monster of req.body.monsterPlayer) {
             let dbMon = [];
 
             if (monster.unit_master_id === undefined) {
-
               dbMon = await database.models["instanceMonster"].findAll({
-
                 limit: 1,
                 where: {
                   unit_id: monster.unit_id,
@@ -92,14 +90,13 @@ const uploadController = () => {
                 ],
                 order: [["createdAt", "DESC"]]
               });
-
             }
-    
+
             //THIS CHECKS FOR EXISTING DATA VALUES FOR MY ARENA MONSTERS
             if (dbMon.length != 0) {
-              monster = {...dbMon[0].dataValues, ...monster};
+              monster = { ...dbMon[0].dataValues, ...monster };
               monster.id = null;
-              console.log(monster);
+
               monster.runes = [];
 
               for (let rune of monster.instanceRunes) {
@@ -110,6 +107,73 @@ const uploadController = () => {
 
             monster.instanceBattleId = battle.id;
             monster.instanceWizardId = wizardPlayer.id;
+            // let monsterPlayer = await database.models["instanceMonster"].create(
+            //   monster
+            // );
+
+            if (monster.runes) {
+              for (let rune of monster.runes) {
+                rune.instanceBattleId = battle.id;
+                rune.instanceWizardId = wizardPlayer.id;
+                // rune.instanceMonsterId = monsterPlayer.id;
+                // await database.models["instanceRune"].create(rune);
+              }
+            }
+            newMonsterPlayer.push(monster);
+          }
+
+          if (req.body.buildingsPlayer.length === 0) {
+            let wizardHasBuildings = await database.models[
+              "instanceBuilding"
+            ].findOne({
+              attribute: {
+                master_id: {
+                  [database.Op.ne]: null
+                }
+              },
+              include: [
+                {
+                  association: "instanceWizard",
+                  where: {
+                    wizard_id: wizardPlayer.wizard_id
+                  }
+                }
+              ]
+            });
+            let buildingos;
+            if (wizardHasBuildings) {
+              buildingos = await database.models["instanceBuilding"].findAll({
+                include: [
+                  {
+                    association: "instanceWizard",
+                    where: {
+                      id: wizardHasBuildings.dataValues.instanceWizardId
+                    }
+                  }
+                ]
+              });
+            }
+
+            if (buildingos) {
+              for (let instanceBuildingReturn of buildingos) {
+                let tempBuilding = instanceBuildingReturn.dataValues;
+                tempBuilding.id = null;
+                tempBuilding.instanceBattleId = battle.id;
+                tempBuilding.instanceWizardId = wizardPlayer.id;
+                req.body.buildingsPlayer.push(tempBuilding);
+                // await database.models["instanceBuilding"].create(tempBuilding);
+              }
+            }
+          }
+
+          req.body.monsterPlayer = await modelService().extendUnitsData(
+            newMonsterPlayer,
+            req.body.buildingsPlayer,
+            req.body.battle.command
+          );
+
+          //FUCKING MADNESS
+          for (let monster of req.body.monsterPlayer) {
             let monsterPlayer = await database.models["instanceMonster"].create(
               monster
             );
@@ -124,17 +188,30 @@ const uploadController = () => {
             }
           }
 
+          for (let building of req.body.buildingsPlayer) {
+            await database.models["instanceBuilding"].create(building);
+          }
+
+          req.body.monsterOpponent = await modelService().extendUnitsData(
+            req.body.monsterOpponent,
+            req.body.buildingsOpponent,
+            req.body.battle.command
+          );
+
           for (let monster of req.body.monsterOpponent) {
             monster.instanceBattleId = battle.id;
             monster.instanceWizardId = wizardOpponent.id;
-            let monsterOpponent = await database.models[
-              "instanceMonster"
-            ].create(monster);
-            for (let rune of monster.runes) {
-              rune.instanceBattleId = battle.id;
-              rune.instanceWizardId = wizardOpponent.id;
-              rune.instanceMonsterId = monsterOpponent.id;
-              await database.models["instanceRune"].create(rune);
+            if (monster.unit_master_id <= 21900) {
+              let monsterOpponent = await database.models[
+                "instanceMonster"
+              ].create(monster);
+
+              for (let rune of monster.runes) {
+                rune.instanceBattleId = battle.id;
+                rune.instanceWizardId = wizardOpponent.id;
+                rune.instanceMonsterId = monsterOpponent.id;
+                await database.models["instanceRune"].create(rune);
+              }
             }
           }
           for (let building of req.body.buildingsOpponent) {
