@@ -1,7 +1,7 @@
 import $ from "jquery";
 const API_ROOT = "http://localhost:3000/api/";
 
-const responseBody = res => res.body;
+// const responseBody = res => res.body;
 
 const apiGetBattleHeadlines =  () => {
   // const response = await fetch("api/instanceBattleHeadLines");

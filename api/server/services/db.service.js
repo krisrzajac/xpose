@@ -21,7 +21,7 @@ const dbService = (environment, migrate) => {
   };
 
   const assDB = () => {
-    console.log(database.models);
+    
     Object.keys(database.models).forEach((modelName) => {
       if (database.models[modelName].associate) {
         database.models[modelName].associate(database.models);

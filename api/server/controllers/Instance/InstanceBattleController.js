@@ -1,6 +1,6 @@
 const instanceBattle = require("../../models/Instance/instanceBattle");
 const database = require("../../../config/database");
-
+const writeFile = require("write");
 const instanceBattleController = () => {
   const create = async (req, res) => {
     // body is part of a form-data
@@ -60,10 +60,6 @@ const instanceBattleController = () => {
       const randomArray = Array.apply(null, Array(10)).map(function() {
         return Math.floor((Math.random() * count) % count);
       });
-      console.log("randomArray: ", randomArray);
-      console.log("****************************************");
-      console.log("****************************************");
-
       const models = await instanceBattle.findAll({
         attributes: ["id", "battle_key"],
         where: {
@@ -114,15 +110,19 @@ const instanceBattleController = () => {
     const { battle_key } = req.params;
 
     try {
+      
+
       const model = await instanceBattle.findOne({
         where: {
           battle_key: battle_key
         },
         include: [
           {
+            separate: true,
             association: "instanceWizards",
             include: [
               {
+                separate: true,
                 association: "instanceMonsters",
                 include: [
                   {
@@ -130,7 +130,46 @@ const instanceBattleController = () => {
                   },
                   {
                     association: "monster",
-                    attributes: ["name", "image_filename"]
+
+                    attributes: [
+                      "name",
+                      "image_filename",
+                      "summonerswar_co_url",
+                      "wikia_url",
+                      "awaken_bonus"
+                    ],
+                    include: [
+                      {
+                        association: "monsterSkills",
+                        attributes: [
+                          "name",
+                          "description",
+                          "max_level",
+                          "level_progress_description",
+                          "icon_filename",
+                          "slot",
+                          "passive",
+                          "cooltime",
+                          "com2us_id",
+                          "hits",
+                          "aoe",
+                          "multiplier_formula",
+                          "multiplier_formula_raw"
+                        ],
+                        include: [
+                          {
+                            association: "monsterSkillEffects"
+                          },
+                          {
+                            association: "monsterSkillScalingStats"
+                          },
+                          {
+                            association: "monsterSkillEffectDetails",
+                            
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -141,7 +180,7 @@ const instanceBattleController = () => {
           }
         ]
       });
-
+      // writeFile("test.json", JSON.stringify(model));
       if (!model) {
         return res.status(400).json({
           msg: "Bad Request: instanceBattle not found"
@@ -153,7 +192,6 @@ const instanceBattleController = () => {
       });
     } catch (err) {
       // better save it to log file
-      console.error(err);
 
       return res.status(500).json({
         msg: "Internal server error"

@@ -100,10 +100,10 @@ const MonsterSkillEffectDetail = sequelize.define('monsterSkillEffectDetail', {
 
 MonsterSkillEffectDetail.associate = function (models) {
   MonsterSkillEffectDetail.belongsTo(models.monsterSkill, {
-    as: 'skill',
+    through:"MonsterSkill_EffectDetail"
   });
   MonsterSkillEffectDetail.belongsTo(models.monsterSkillEffect, {
-    as: 'effect',
+    through:"MonsterSkillEffect_EffectDetail"
   });
 };
 

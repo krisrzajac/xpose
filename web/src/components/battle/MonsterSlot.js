@@ -1,41 +1,61 @@
 import React from "react";
-import { Modal } from "antd";
+import PropTypes from "prop-types";
+
 import MonsterPopUp from "./MonsterPopUp";
-import "antd/dist/antd.css";
+import RunePopUp from "./RunePopUp";
+import RuneContainer from "./RuneContainer";
+
+import Modal from "@material-ui/core/Modal";
+import { withStyles } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`
+  };
+}
+
+const styles = theme => ({
+  paper: {
+    position: "absolute",
+    width: `${90}%`,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 1
+  }
+});
 
 class MonsterSlot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
+      open: false,
       instanceMonster: props.instanceMonster,
       battle_key: props.battle_key,
       wizard_id: props.wizard_id
     };
   }
 
-  showModal = () => {
-    this.setState({
-      visible: true
-    });
+  handleOpen = () => {
+    this.setState({ open: true });
   };
-  handleOk = e => {
-    console.log(e);
-    this.setState({
-      visible: false
-    });
-  };
-  handleCancel = e => {
-    console.log(e);
-    this.setState({
-      visible: false
-    });
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="column">
-       <h1 className="title is-5 is-mobile" >{this.state.instanceMonster.monster.name}</h1>
+      <div className="column border-button">
+        <h1 className="title is-size-7-mobile">
+          {this.state.instanceMonster.monster.name}
+        </h1>
         <img
           key={
             "PortraitRowIcon-" +
@@ -51,48 +71,139 @@ class MonsterSlot extends React.Component {
               : "../img/monsters/missing.jpg"
           }
           alt=""
-          className="BattlePage-icon"
+          className="BattlePage-icon zoom-tilt border-button"
           type="primary"
-          onClick={this.showModal}
+          onClick={this.handleOpen}
         />
         <Modal
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          footer ={null}
-          mask= {false}
-          width = {1040}
+          open={this.state.open}
+          onClose={this.handleClose}
         >
-          <MonsterPopUp
-            instanceMonster={this.state.instanceMonster}
-            battle_key={this.state.battle_key}
-            wizard_id={this.state.wizard_id}
-
-          />
-        </Modal>
-        <div className="columns">
-          <div className="column is-12">
-            <div className="columns">
-              <div className="column is-1" />
-              <div className="column is-5">Local HP:</div>
-              <div className="column is-5">
-                {this.state.instanceMonster.local_total_hp}
-              </div>
-              <div className="column is-1" />
-            </div>
-            <div className="columns">
-              <div className="column is-1" />
-              <div className="column is-5">Final HP:</div>
-              <div className="column is-5">
-                {this.state.instanceMonster.final_total_hp}
-              </div>
-              <div className="column is-1" />
-            </div>
+          <div
+            style={getModalStyle()}
+            className={classes.paper + " has-background-dark"}
+          >
+            <MonsterPopUp
+              instanceMonster={this.state.instanceMonster}
+              battle_key={this.state.battle_key}
+              wizard_id={this.state.wizard_id}
+            />
           </div>
-        </div>
+        </Modal>
+        {/*****************************************************************************************/}
+        {/*****************************************************************************************/}
+        {/*****************************************************************************************/}
+        <table className="table is-centered">
+          <tbody>
+            <tr>
+              <td className="has-text-right is-size-7-mobile has-text-weight-bold">
+                <Tooltip
+                  id="tooltip-ehp"
+                  title={
+                    "game total HP * ( 1140 * game total DEF * 3.5 ) / 1000"
+                  }
+                  disableTouchListener={true}
+                  placement="top"
+                >
+                  <span> EHP : </span>
+                </Tooltip>
+              </td>
+              <td className="has-text-right is-size-7-mobile">
+                {this.state.instanceMonster.eff_hp}
+              </td>
+            </tr>
+            <tr>
+              <td className="has-text-right is-size-7-mobile has-text-weight-bold">
+                <Tooltip
+                  id="tooltip-ehpd"
+                  title={
+                    "game total HP * ( 1140 * game total DEF * 1.05 ) / 1000"
+                  }
+                  disableTouchListener={true}
+                  placement="top"
+                >
+                  <span> EHP DB : :</span>
+                </Tooltip>
+              </td>
+              <td className="has-text-right is-size-7-mobile">
+                {this.state.instanceMonster.eff_hp_broken}
+              </td>
+            </tr>
+            <tr>
+              <td className="has-text-right is-size-7-mobile has-text-weight-bold">
+                <Tooltip
+                  id="tooltip-fehp"
+                  title={
+                    "final total HP * ( 1140 * final total DEF * 3.5 ) / 1000"
+                  }
+                  disableTouchListener={true}
+                  placement="top"
+                >
+                  <span> FEHP : </span>
+                </Tooltip>
+              </td>
+              <td className="has-text-right is-size-7-mobile">
+                {this.state.instanceMonster.final_eff_hp}
+              </td>
+            </tr>
+            <tr>
+              <td className="has-text-right is-size-7-mobile has-text-weight-bold">
+                <Tooltip
+                  id="tooltip-fehpd"
+                  title={
+                    "final total HP * ( 1140 * final total DEF * 3.5 ) / 1000"
+                  }
+                  disableTouchListener={true}
+                  placement="top"
+                >
+                  <span> FEHPD : </span>
+                </Tooltip>
+              </td>
+              <td className="has-text-right is-size-7-mobile">
+                {this.state.instanceMonster.final_eff_hp_broken}
+              </td>
+            </tr>
+            <tr>
+              <td className="has-text-right is-size-7-mobile has-text-weight-bold">
+                <Tooltip
+                  id="tooltip-avgeff"
+                  title={"Rune efficiency average"}
+                  disableTouchListener={true}
+                  placement="top"
+                >
+                  <span> Avg Eff. : </span>
+                </Tooltip>
+              </td>
+              <td className="has-text-right is-size-7-mobile">
+                {Math.floor(
+                  this.state.instanceMonster.avg_rune_efficiency * 100
+                ) / 100}
+              </td>
+            </tr>
+            <tr>
+              <td className="has-text-right is-size-7-mobile">{this.state.instanceMonster.set_complete.map((object, index) => {
+                return (object + (index<this.state.instanceMonster.set_complete.length?" ": ""))
+
+              })}</td>
+            </tr>
+          </tbody>
+        </table>
+        {/*****************************************************************************************/}
+        {/*****************************************************************************************/}
+        {/*****************************************************************************************/}
+        <RuneContainer
+          instanceRunes={this.state.instanceMonster.instanceRunes}
+          unit_id={this.state.unit_id}
+          battle_key={this.state.battle}
+          wizard_id={this.state.battle_key}
+        />
       </div>
     );
   }
 }
+MonsterSlot.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
-export default MonsterSlot;
+const MonsterSlotWrapped = withStyles(styles)(MonsterSlot);
+export default MonsterSlotWrapped;

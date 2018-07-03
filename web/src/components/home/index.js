@@ -3,12 +3,10 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   HOME_PAGE_LOADED,
-  HOME_PAGE_UNLOADED,
-  API_HEADLINES
+  HOME_PAGE_UNLOADED
 } from "../../constants/constants";
 
 import ajaxApi from "../../ajaxApi";
-import MainView from "./MainView";
 import BattleHeadlineContainer from "./BattleHeadlineContainer";
 
 const Promise = global.Promise;
@@ -33,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
 
     this.props.onLoad(Promise.resolve(ajaxApi.apiGetBattleHeadlines()));
   

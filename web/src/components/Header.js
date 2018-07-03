@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../img/monsters/devilmon_dark.png";
@@ -78,7 +78,7 @@ const Banner = props => {
   return (
     <header className="App-banner">
       <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Welcome to Dongshrouder</h1>
+      <h1 className="App-title">Welcome to SWXpose</h1>
     </header>
   );
 };
@@ -86,9 +86,7 @@ const Banner = props => {
 class Header extends React.Component {
 
   render() {
-    console.log("****************************************");
-    console.log("this.props: ", this.props);
-    console.log("****************************************");
+    
     return (
       <div className="full-header">
         <nav className="navbar navbar-light">

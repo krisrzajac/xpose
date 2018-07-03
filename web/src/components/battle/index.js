@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadBattleObject: battle_key => {
-    console.log("mapDispatchToProps battle_key: ", battle_key);
+    
     dispatch({
       type: API_BATTLE_LOAD,
       payload: ajaxApi.apiGetBattle(battle_key)
@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Battle extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { match: { params } } = this.props;
    
     // this.props.loadBattleObject(params.battle_key);
@@ -53,7 +53,7 @@ class Battle extends React.Component {
     this.props.onUnload();
   }
   render() {
-    console.log("BATTLE PAGE PROPS: " ,  this.props)
+   
     return (
       <div className="BattlePage">
       Heyo

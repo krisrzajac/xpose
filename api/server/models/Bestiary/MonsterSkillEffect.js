@@ -49,6 +49,9 @@ MonsterSkillEffect.associate = function (models) {
   MonsterSkillEffect.belongsToMany(models.monsterSkill, {
     through: 'MonsterSkill_SkillEffect',
   });
+  MonsterSkillEffect.belongsToMany(models.monsterSkillEffectDetail, {
+    through: 'MonsterSkillEffect_EffectDetail',
+  });
 };
 
 module.exports = MonsterSkillEffect;

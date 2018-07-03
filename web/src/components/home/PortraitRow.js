@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 function PortraitRow(props) {
   const monsters = props.monsters;

@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 
 import "./App.css";
-import 'bulma/css/bulma.css'
+//Debug css file, outlines / shows margins etc
+
+import 'bulma/css/bulma.css';
+
 import { connect } from "react-redux";
-import { push } from "react-router-redux";
 import { Route, Switch } from "react-router-dom";
 
-import { store } from "../store";
 
-import ajaxApi from "../ajaxApi";
-
-import { Spring, Transition, animated } from "react-spring";
 
 import Header from "./Header";
 import Home from "./home";
@@ -27,8 +25,6 @@ const mapStateToProps = state => {
   };
   
 };
-
-const mapDispatchToProps = dispatch => ({});
 
 class App extends Component {
   render() {
